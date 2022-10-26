@@ -6,9 +6,10 @@ import { SIGNIN_URL } from '../../../constants';
 
 /** Types */
 import { Form } from '../../../hooks/useForm';
+import { StudentData } from '../StudentForm';
 
 /** Hooks */
-import { StudentData, useSignUpStudent } from '../../../hooks/useSignUp';
+import { useSignUpStudent } from '../../../hooks/useSignUp';
 
 /** Components */
 import SignUpForm from '../SignUpForm';
