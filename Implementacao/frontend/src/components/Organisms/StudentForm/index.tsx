@@ -7,14 +7,14 @@ import { Field } from '../../../hooks/useForm';
 import Form from '../../Molecules/Form';
 
 export type StudentData = {
-  name?: string;
+  nome?: string;
   email?: string;
-  password?: string;
+  senha?: string;
   rg?: string;
   cpf?: string;
-  address?: string;
-  courseId?: string;
-  institutionId?: string;
+  endereco?: string;
+  id_curso?: string;
+  id_instituicao?: string;
 }
 
 type StudentFormProps = {
@@ -32,8 +32,8 @@ const StudentForm = ({
     {
       type: 'text',
       label: 'Nome',
-      name: 'name',
-      value: values?.name || '',
+      name: 'nome',
+      value: values?.nome || '',
       required: true
     },
     {
@@ -46,8 +46,8 @@ const StudentForm = ({
     {
       type: 'password',
       label: 'Senha',
-      name: 'password',
-      value: values?.password || '',
+      name: 'senha',
+      value: values?.senha || '',
       required: true
     },
     {
@@ -67,22 +67,22 @@ const StudentForm = ({
     {
       type: 'text',
       label: 'Endereco',
-      name: 'address',
-      value: values?.address || '',
+      name: 'endereco',
+      value: values?.endereco || '',
       required: true
     },
     {
       type: 'text',
       label: 'Curso',
-      name: 'courseId',
-      value: values?.courseId || '',
+      name: 'id_curso',
+      value: values?.id_curso || '',
       required: true
     },
     {
       type: 'text',
       label: 'Instituição de Ensino',
-      name: 'schoolId',
-      value: values?.institutionId || '',
+      name: 'id_instituicao',
+      value: values?.id_instituicao || '',
       required: true
     },
   ]

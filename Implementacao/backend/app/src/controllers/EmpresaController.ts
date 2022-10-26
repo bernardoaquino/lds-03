@@ -46,6 +46,17 @@ export class EmpresaController {
         return res.json(empresa);
     }
 
+    async getProfile(req: Request<{ id: string }>, res: Response) {
+        const id = req.id;
+        const empresa = await empresaRepository.findOneBy({ id: Number(id) });
+
+        if(!empresa) {
+            throw new NotFoundError('Empresa inexistente!');
+        }
+
+        return res.json(empresa);
+    }
+
     async destroy(req: Request<{ id: string }>, res: Response) {
         const id = req.params.id;
         const empresa = await empresaRepository.findOneBy({ id: Number(id) });

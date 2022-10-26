@@ -7,9 +7,9 @@ import { Field } from '../../../hooks/useForm';
 import Form from '../../Molecules/Form';
 
 export type BusinessData = {
-    name?: string;
+    nome?: string;
     email?: string;
-    password?: string;
+    senha?: string;
 }
 
 type BusinessFormProps = {
@@ -27,8 +27,8 @@ const BusinessForm = ({
     {
       type: 'text',
       label: 'Nome',
-      name: 'name',
-      value: values?.name || '',
+      name: 'nome',
+      value: values?.nome || '',
       required: true
     },
     {
@@ -41,8 +41,8 @@ const BusinessForm = ({
     {
       type: 'password',
       label: 'Senha',
-      name: 'password',
-      value: values?.password || '',
+      name: 'senha',
+      value: values?.senha || '',
       required: true
     },
   ]

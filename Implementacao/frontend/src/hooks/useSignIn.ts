@@ -17,7 +17,7 @@ const useSignIn = () => {
   const { updateSession } = useSession();
 
   const signIn = async (user: UserCredentials): Promise<UserSignInResponse> => {
-    const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/auth`, {
+    const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/login`, {
       method: 'POST',
       body: JSON.stringify({
         ...user
@@ -36,7 +36,7 @@ const useSignIn = () => {
       const responseBody = await response.json();
 
       updateSession({
-        name: responseBody.name,
+        name: responseBody.user.nome,
         token: responseBody.token,
         userType: responseBody?.userType
       });

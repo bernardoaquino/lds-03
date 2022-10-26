@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 /** Constants */
-import { BUSINESS_SIGNUP_URL, STUDENT_SIGNUP_URL } from '../../../constants';
+import { BUSINESS_PROFILE_URL, BUSINESS_SIGNUP_URL, STUDENT_PROFILE_URL, STUDENT_SIGNUP_URL } from '../../../constants';
 
 /** Hooks */
 import { Form } from '../../../hooks/useForm';
@@ -22,8 +22,8 @@ const UserSignUp = () => {
     signIn(formValues as UserCredentials).then(response => {
       if (!response.error && response?.userType) {
         const urlMap = {
-          business: '/',
-          student: '/',
+          business: BUSINESS_PROFILE_URL,
+          student: STUDENT_PROFILE_URL,
           institution: '/',
         }
 

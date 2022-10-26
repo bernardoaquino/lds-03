@@ -11,5 +11,6 @@ export const PageWrapper = styled.div`
 `;
 
 export const CardWrapper = styled.div`
-  ${(props) => WidthDelimiter(props.theme.grid(60))}
+  height: 100%;
+  width: 100%;
 `
