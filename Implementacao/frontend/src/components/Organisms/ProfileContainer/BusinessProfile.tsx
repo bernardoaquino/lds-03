@@ -24,6 +24,7 @@ const BusinessProfile = () => {
     update(formValues as BusinessData).then(response => {
       if (!response.error) {
         refetch();
+        setIsModalOpen(false);
       }
     });
   }
@@ -31,8 +32,8 @@ const BusinessProfile = () => {
   return (
     <El.Wrapper>
       <El.Header>
-        <El.Name>{business?.name}</El.Name>
-        <Button color={'primary'}>editar</Button>
+        <El.Name>{business?.nome}</El.Name>
+        <Button onClick={() => setIsModalOpen(true)} color={'primary'}>editar</Button>
       </El.Header>
       <Modal
         title={'editar dados'}

@@ -69,7 +69,7 @@ export const AuthProvider = ({
 
     const updateSession = (session: Session) => setSession((prevSession: Session) => {
         const headersToAppend: KeyValuePair<string> = session?.token ? {
-            'Authorization': session.token
+            'Authorization': `Bearer ${session.token}`
         } : {};
 
         localStorage.removeItem('session');

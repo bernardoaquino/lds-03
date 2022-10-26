@@ -24,6 +24,7 @@ const StudentProfile = () => {
     update(formValues as StudentData).then(response => {
       if (!response.error) {
         refetch();
+        setIsModalOpen(false);
       }
     });
   }
@@ -31,8 +32,8 @@ const StudentProfile = () => {
   return (
     <El.Wrapper>
       <El.Header>
-        <El.Name>{student?.name}</El.Name>
-        <Button color={'primary'}>editar</Button>
+        <El.Name>{student?.nome}</El.Name>
+        <Button onClick={() => setIsModalOpen(true)} color={'primary'}>editar</Button>
       </El.Header>
       <El.DataEntry>
         <b>CPF</b>: {student?.cpf}
@@ -41,7 +42,7 @@ const StudentProfile = () => {
         <b>RG</b>: {student?.rg}
       </El.DataEntry>
       <El.DataEntry>
-        <b>Endereco</b>: {student?.address}
+        <b>Endereco</b>: {student?.endereco}
       </El.DataEntry>
       <Modal
         title={'editar dados'}

@@ -6,28 +6,28 @@ import { alunoRepository } from '../repositories/alunoRepository';
 import { empresaRepository } from '../repositories/empresaRepository';
 
 export class AuthController {
-    private async validatePassword(id: any, password: string, user: any): Promise<string> {
-        const verifySenha = await bcrypt.compare(password, user.senha);
-        
-        if (!verifySenha) {
-            throw new BadRequestError('E-mail ou senha inválidos')
-        }
-
-        const token = jwt.sign({ id: user.id }, process.env.JWT_PASS ?? '', { 
-            expiresIn: '365d' 
-        })
-
-        return token;
-    }
-
     async login(req: Request, res: Response) {
         const { email, senha } = req.body
-        
+       
+        const validatePassword = async (id: any, password: string, user: any): Promise<string> => {
+            const verifySenha = await bcrypt.compare(password, user.senha);
+            
+            if (!verifySenha) {
+                throw new BadRequestError('E-mail ou senha inválidos')
+            }
+    
+            const token = jwt.sign({ id: user.id }, process.env.JWT_PASS ?? '', { 
+                expiresIn: '365d' 
+            })
+    
+            return token;
+        }
+
         const aluno = await alunoRepository.findOneBy({ email })
         
         //Por enquanto só login com instituição, futuramente login com professor e aluno (diferentes permissões para cada tipo de login?)
         if (aluno) {
-            const token = this.validatePassword(aluno.id, senha, aluno)
+            const token = await validatePassword(aluno.id, senha, aluno)
     
             const { senha: _, ...alunoLogin } = aluno;
     
@@ -41,7 +41,9 @@ export class AuthController {
         const empresa = await empresaRepository.findOneBy({ email })
 
         if(empresa) {
-            const token = this.validatePassword(empresa.id, senha, empresa)
+            const token = await validatePassword(empresa.id, senha, empresa)
+
+            console.log(token, empresa)
     
             const { senha: _, ...empresaLogin } = empresa;
     

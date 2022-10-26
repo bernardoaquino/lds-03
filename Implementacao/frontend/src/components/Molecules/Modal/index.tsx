@@ -30,7 +30,7 @@ const Modal = ({
         onClose?.();
     }
 
-    const handleOverlayClick = (e) => {
+    const handleOverlayClick = (e: any) => {
         if (overlayRef?.current && !e.target.closest(overlayRef?.current?.className)) {
             handleCloseModal();
         }
