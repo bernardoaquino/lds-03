@@ -23,7 +23,7 @@ const useBusiness = (): UseBusinessResponse => {
     const getBusinessData = useCallback(async (keepIsLoadingState = false) => {
         !keepIsLoadingState && setIsLoading(true);
 
-        const responseData = await fetch(`${process.env.REACT_APP_API_BASE_URL}/business`, {
+        const responseData = await fetch(`${process.env.REACT_APP_API_BASE_URL}/perfil/empresa`, {
             headers: session.authHeaders
         })
 

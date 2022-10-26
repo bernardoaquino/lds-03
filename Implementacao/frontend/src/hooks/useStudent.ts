@@ -23,7 +23,7 @@ const useStudent = (): UseStudentResponse => {
     const getStudentData = useCallback(async (keepIsLoadingState = false) => {
         !keepIsLoadingState && setIsLoading(true);
 
-        const responseData = await fetch(`${process.env.REACT_APP_API_BASE_URL}/Student`, {
+        const responseData = await fetch(`${process.env.REACT_APP_API_BASE_URL}/perfil/aluno`, {
             headers: session.authHeaders
         })
 

@@ -63,6 +63,17 @@ export class AlunoController {
         return res.json(aluno);
     }
 
+    async getProfile(req: Request<{ id: string }>, res: Response) {
+        const id = req.id;
+        const aluno = await alunoRepository.findOneBy({ id: Number(id) });
+
+        if(!aluno) {
+            throw new NotFoundError('Aluno inexistente!');
+        }
+
+        return res.json(aluno);
+    }
+
     async destroy(req: Request<{ id: string }>, res: Response) {
         const id = req.params.id;
         const aluno = await alunoRepository.findOneBy({ id: Number(id) });

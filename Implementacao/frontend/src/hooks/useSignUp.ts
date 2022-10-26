@@ -18,7 +18,7 @@ type SignUpResponse = {
 
 export const useSignUpStudent = () => {
   const signUp = async (user: StudentData): Promise<SignUpResponse> => {
-    const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/student`, {
+    const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/aluno`, {
       method: 'POST',
       body: JSON.stringify({
         ...user
@@ -51,7 +51,7 @@ export const useSignUpStudent = () => {
 
 export const useSignUpBusiness = () => {
   const signUp = async (agent: BusinessData): Promise<SignUpResponse | void> => {
-    const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/business`, {
+    const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/empresa`, {
       method: 'POST',
       body: JSON.stringify({
         ...agent
