@@ -6,9 +6,10 @@ import { SIGNIN_URL } from '../../../constants';
 
 /** Types */
 import { Form } from '../../../hooks/useForm';
+import { BusinessData } from '../BusinessForm';
 
 /** Hooks */
-import { StudentData, useSignUpStudent } from '../../../hooks/useSignUp';
+import { useSignUpBusiness } from '../../../hooks/useSignUp';
 
 /** Components */
 import SignUpForm from '../SignUpForm';
@@ -16,12 +17,12 @@ import SignUpForm from '../SignUpForm';
 /** Style */
 import * as El from './SignUpContainer.style';
 
-const StudentSignUp = () => {
+const BusinessSignUp = () => {
   const navigate = useNavigate();
-  const { signUp } = useSignUpStudent();
+  const { signUp } = useSignUpBusiness();
 
   const handleSubmit = (formValues: Form) => {
-    signUp(formValues as StudentData).then(response => {
+    signUp(formValues as BusinessData).then(response => {
       if (response?.userCreatedSuccessfully) {
         navigate(SIGNIN_URL);
       }
@@ -37,4 +38,4 @@ const StudentSignUp = () => {
   )
 }
 
-export default StudentSignUp;
+export default BusinessSignUp;

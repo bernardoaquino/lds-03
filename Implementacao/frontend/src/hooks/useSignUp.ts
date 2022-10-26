@@ -1,18 +1,14 @@
 import { toast } from 'react-toastify';
 
+/** Types */
+import { BusinessData } from '../components/Organisms/BusinessForm';
+import { StudentData } from '../components/Organisms/StudentForm';
+
 type UserAddress = {
   street: string;
   neighbourhood: string;
   zipCode: string;
   state: string;
-}
-
-export type StudentData = {
-  name: string;
-  email: string;
-  rg: string;
-  cpf: string;
-  address: string;
 }
 
 type SignUpResponse = {
@@ -52,12 +48,6 @@ export const useSignUpStudent = () => {
     signUp
   };
 };
-
-export type BusinessData = {
-  nome: string;
-  login: string;
-  senha: string;
-}
 
 export const useSignUpBusiness = () => {
   const signUp = async (agent: BusinessData): Promise<SignUpResponse | void> => {
