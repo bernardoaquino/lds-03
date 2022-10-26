@@ -17,7 +17,7 @@ type IModal = {
 }
 
 export const Modal = styled.div<IModal>`
-    background-color: ${(props) => props.theme.color.neutral[100]};
+    background-color: ${(props) => props.theme.color.neutral[0]};
     border-radius: ${(props) => props.theme.grid(1)};
     padding: ${(props) => props.theme.grid(4)};
     max-width: 90vw;
@@ -34,10 +34,15 @@ export const ModalHeader = styled.div`
 `
 
 export const ModalTitle = styled.p`
-    color: ${(props) => props.theme.color.brand.light};
+    color: ${(props) => props.theme.color.primary.light};
     font-size: ${(props) => props.theme.typography.fontSize[12]};
 `
 
 export const ModalContent = styled.div`
     margin-top: ${(props) => props.theme.grid(5)};
+`
+
+export const CloseModal = styled.p`
+    color: ${(props) => props.theme.color.primary.light};
+    font-size: ${(props) => props.theme.typography.fontSize[14]};
 `

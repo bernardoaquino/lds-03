@@ -1,8 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 
-/** Assets */
-import XCircleIcon from 'assets/x-circle.svg';
-
 /** Style */
 import * as El from './Modal.style';
 
@@ -46,7 +43,7 @@ const Modal = ({
             <El.Modal onClick={(e) => e.stopPropagation()} width={width}>
                 <El.ModalHeader>
                     <El.ModalTitle>{title}</El.ModalTitle>
-                    <XCircleIcon onClick={handleCloseModal} height={16} width={16} />
+                    <El.CloseModal onClick={handleCloseModal}>&#10005;</El.CloseModal>
                 </El.ModalHeader>
                 <El.ModalContent>
                     {content}
