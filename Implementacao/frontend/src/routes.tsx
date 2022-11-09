@@ -22,6 +22,10 @@ import StudentProfile from './pages/Profile/StudentProfile';
 
 const routes = [
   {
+    path: '/',
+    element: <SignIn />
+  },
+  {
     path: SIGNIN_URL,
     element: <SignIn />
   },
