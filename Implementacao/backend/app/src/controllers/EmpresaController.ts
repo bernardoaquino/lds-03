@@ -46,8 +46,8 @@ export class EmpresaController {
         return res.json(empresa);
     }
 
-    async getProfile(req: Request<{ id: string }>, res: Response) {
-        const id = req.id;
+    async getProfile(req: Request, res: Response) {
+        const id = req.empresa.id;
         const empresa = await empresaRepository.findOneBy({ id: Number(id) });
 
         if(!empresa) {

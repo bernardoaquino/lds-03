@@ -1,6 +1,7 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Curso } from './Curso';
 import { InstituicaoDeEnsino } from './InstituicaoDeEnsino';
+import { Transacao } from "./Transacao";
 
 @Entity('alunos')
 export class Aluno {
@@ -35,4 +36,7 @@ export class Aluno {
     @ManyToOne(() => InstituicaoDeEnsino, instituicaoDeEnsinoId => instituicaoDeEnsinoId.alunos)
     @JoinColumn({ name: 'instituicaoDeEnsinoId' })
     instituicaoDeEnsino: InstituicaoDeEnsino
+
+    @OneToMany(() => Transacao, transacao => transacao.aluno)
+    transacoes: Transacao[]
 }

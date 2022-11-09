@@ -52,6 +52,18 @@ export class InstituicaoDeEnsinoController {
         return res.json(instituicaoDeEnsino);
     }
 
+    async getProfile(req: Request, res: Response) {
+        console.log("sadsadsdasd")
+        const id = req.instituicaoDeEnsino.id;
+        const instituicao = await instituicaoDeEnsinoRepository.findOneBy({ id: Number(id) });
+
+        if(!instituicao) {
+            throw new NotFoundError('Instituição inexistente!');
+        }
+
+        return res.json(instituicao);
+    }
+
     async destroy(req: Request<{ id: string }>, res: Response) {
         const id = req.params.id;
         const instituicao = await instituicaoDeEnsinoRepository.findOneBy({ id: Number(id) });
