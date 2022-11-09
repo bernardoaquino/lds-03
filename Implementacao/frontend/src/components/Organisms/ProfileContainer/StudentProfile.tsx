@@ -11,6 +11,7 @@ import useUpdateStudent from '../../../hooks/useUpdateStudent';
 import Button from '../../Atoms/Button';
 import Modal from '../../Molecules/Modal';
 import StudentForm, { StudentData } from '../StudentForm';
+import TransactionHistory from '../TransactionHistory';
 
 /** Style */
 import * as El from './ProfileContainer.style';
@@ -44,6 +45,7 @@ const StudentProfile = () => {
       <El.DataEntry>
         <b>Endereco</b>: {student?.endereco}
       </El.DataEntry>
+      <TransactionHistory />
       <Modal
         title={'editar dados'}
         open={isModalOpen}

@@ -12,6 +12,7 @@ import useUpdateProfessor from '../../../hooks/useUpdateProfessor';
 import Button from '../../Atoms/Button';
 import Modal from '../../Molecules/Modal';
 import ProfessorForm, { ProfessorData } from '../ProfessorForm';
+import TransactionHistory from '../TransactionHistory';
 import TransferForm from '../TransferForm';
 
 /** Style */
@@ -53,6 +54,7 @@ const ProfessorProfile = () => {
       <El.DataEntry>
         <b>CPF</b>: {professor?.cpf}
       </El.DataEntry>
+      <TransactionHistory />
       <Modal
         title={'editar dados'}
         open={isModalOpen}
