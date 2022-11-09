@@ -18,7 +18,7 @@ export class AuthController {
                 throw new BadRequestError('E-mail ou senha inválidos')
             }
     
-            const token = jwt.sign({ id: user.id }, process.env.JWT_PASS ?? '', { 
+            const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_PASS ?? '', { 
                 expiresIn: '365d' 
             })
     

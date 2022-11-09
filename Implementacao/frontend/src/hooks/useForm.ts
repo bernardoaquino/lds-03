@@ -4,7 +4,7 @@ import { Option as SelectOption } from "../components/Atoms/FormField/Select";
 
 
 export type Field = {
-  type: 'text' | 'password' | 'email' | 'select';
+  type: 'text' | 'number' | 'password' | 'email' | 'select';
   name: string;
   label: string;
   required?: boolean;

@@ -40,6 +40,22 @@ export class DepartamentoController {
         return res.json(departamentos);
     }
 
+    async listByInstituicao(req: Request<{ id: string }>, res: Response) {
+        const id_instituicao = req.params.id
+
+        const instituicaoDeEnsino = await instituicaoDeEnsinoRepository.findOneBy({ id: Number(id_instituicao) })
+
+        if(!instituicaoDeEnsino) {
+            throw new NotFoundError('Instituição inexistente!');
+        }
+
+        const departamentos = await departamentoRepository.findBy({
+            instituicaoDeEnsino
+        })
+
+        return res.json(departamentos)
+    }
+
     async listOne(req: Request<{ id: string }>, res: Response) {
         const id = req.params.id;
         const departamento = await departamentoRepository.findOne({

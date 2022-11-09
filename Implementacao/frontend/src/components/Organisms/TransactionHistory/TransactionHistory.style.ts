@@ -1,19 +1,9 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-export const Header = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-export const Name = styled.h2`
-  font-size: ${(props) => props.theme.typography.fontSize[24]};
-`;
+export const Transaction = styled.div`
+    padding: ${(props) => props.theme.grid(3)};
+    border-radius: ${(props) => props.theme.grid(1)};
+`
 
 export const DataEntry = styled.p`
   color: ${(props) => props.theme.color.neutral[75]};
@@ -25,8 +15,3 @@ export const DataEntry = styled.p`
     font-weight: ${(props) => props.theme.typography.fontWeight.bold};
   }
 `;
-
-export const Transfer = styled.div`
-  display: flex;
-  align-items: center;
-`
