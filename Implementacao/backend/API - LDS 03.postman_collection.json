@@ -92,7 +92,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/aluno/1",
+							"raw": "http://localhost:3000/aluno/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -100,7 +100,7 @@
 							"port": "3000",
 							"path": [
 								"aluno",
-								"1"
+								"5"
 							]
 						}
 					},
@@ -174,6 +174,410 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Perfil",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNjY3OTg1OTM1LCJleHAiOjE2OTk1MjE5MzV9.uSeVBtFU2psXuqv8g-PdwwryytYSkEBlP00foyQJsMw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/perfil/aluno/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"perfil",
+								"aluno",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Professor",
+			"item": [
+				{
+					"name": "Criar Professor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjY2NzcyODQ5LCJleHAiOjE2OTgzMDg4NDl9.1I6BzmSQv0_JxISU-OuGwWU0YE_CzxecIDozR9HBm6Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"teste\",\r\n    \"email\": \"teste@gmail.com\",\r\n    \"senha\": \"teste\",\r\n    \"cpf\": \"123\", \r\n    \"id_departamento\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/professor",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"professor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Professor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjY2NzcyODQ5LCJleHAiOjE2OTgzMDg4NDl9.1I6BzmSQv0_JxISU-OuGwWU0YE_CzxecIDozR9HBm6Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/professor",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"professor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Professor By ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjY2NzcyODQ5LCJleHAiOjE2OTgzMDg4NDl9.1I6BzmSQv0_JxISU-OuGwWU0YE_CzxecIDozR9HBm6Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/professor/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"professor",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Professor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjY2NzcyODQ5LCJleHAiOjE2OTgzMDg4NDl9.1I6BzmSQv0_JxISU-OuGwWU0YE_CzxecIDozR9HBm6Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"teste2\",\r\n    \"email\": \"teste2@gmail.com\",\r\n    \"senha\": \"teste\",\r\n    \"cpf\": \"1234\", \r\n    \"id_departamento\": 1,\r\n    \"qtde_moedas\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/professor/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"professor",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Professor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjY2NzcyODQ5LCJleHAiOjE2OTgzMDg4NDl9.1I6BzmSQv0_JxISU-OuGwWU0YE_CzxecIDozR9HBm6Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/professor/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"professor",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Perfil",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjY3OTg5NDk0LCJleHAiOjE2OTk1MjU0OTR9.UY3BYzs7kxYFFE6linbum86EufnQxBQ_QPnS-qOQ1F8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/perfil/professor/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"perfil",
+								"professor",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Departamento",
+			"item": [
+				{
+					"name": "Criar Departamento",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjY3OTg5NDk0LCJleHAiOjE2OTk1MjU0OTR9.UY3BYzs7kxYFFE6linbum86EufnQxBQ_QPnS-qOQ1F8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"teste\",\r\n    \"id_instituicao\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/departamento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"departamento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Departamentos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjY3OTg5NDk0LCJleHAiOjE2OTk1MjU0OTR9.UY3BYzs7kxYFFE6linbum86EufnQxBQ_QPnS-qOQ1F8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/departamento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"departamento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Departamento By ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjY2NzcyODQ5LCJleHAiOjE2OTgzMDg4NDl9.1I6BzmSQv0_JxISU-OuGwWU0YE_CzxecIDozR9HBm6Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/departamento/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"departamento",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Departamento",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjY2NzcyODQ5LCJleHAiOjE2OTgzMDg4NDl9.1I6BzmSQv0_JxISU-OuGwWU0YE_CzxecIDozR9HBm6Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"departamento\",\r\n    \"id_instituicao\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/departamento/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"departamento",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Departamento",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjY2NzcyODQ5LCJleHAiOjE2OTgzMDg4NDl9.1I6BzmSQv0_JxISU-OuGwWU0YE_CzxecIDozR9HBm6Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/departamento/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"departamento",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -197,7 +601,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"admin@gmail.com\",\r\n    \"nome\": \"admin\",\r\n    \"senha\": \"admin\"\r\n}",
+							"raw": "{\r\n    \"email\": \"admin2@gmail.com\",\r\n    \"nome\": \"admin2\",\r\n    \"senha\": \"admin2\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -241,6 +645,36 @@
 							],
 							"port": "3000",
 							"path": [
+								"instituicao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Perfil",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjY3OTg4NDQ2LCJleHAiOjE2OTk1MjQ0NDZ9.cLoNobLkXKy7-NsAzZRsDgZzB-iSxZVYj9FAeC-B_vs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/perfil/instituicao",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"perfil",
 								"instituicao"
 							]
 						}
@@ -324,7 +758,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"admin2@gmail.com\",\r\n    \"nome\": \"admin2\",\r\n    \"senha\": \"admin2\"\r\n}",
+							"raw": "{\r\n    \"email\": \"admin3@gmail.com\",\r\n    \"nome\": \"admin3\",\r\n    \"senha\": \"admin3\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -332,7 +766,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/instituicao/1",
+							"raw": "http://localhost:3000/instituicao/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -340,7 +774,7 @@
 							"port": "3000",
 							"path": [
 								"instituicao",
-								"1"
+								"3"
 							]
 						}
 					},
@@ -397,7 +831,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjY2NzcyODQ5LCJleHAiOjE2OTgzMDg4NDl9.1I6BzmSQv0_JxISU-OuGwWU0YE_CzxecIDozR9HBm6Y",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjY2Nzc4MDg2LCJleHAiOjE2OTgzMTQwODZ9.0Fxf7LdfCALct53kwnf5Z5zElywklZHdmKzOs1wzhKQ",
 									"type": "string"
 								}
 							]
@@ -443,6 +877,37 @@
 							"path": [
 								"empresa",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Perfil",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjY3OTg1NDkzLCJleHAiOjE2OTk1MjE0OTN9.r9YHBNy9Fz_MnaSAT72jS2I0vfn5lxBVlbfwQeh__vI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/perfil/empresa/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"perfil",
+								"empresa",
+								""
 							]
 						}
 					},
@@ -694,7 +1159,7 @@
 			"name": "Login",
 			"item": [
 				{
-					"name": "Login",
+					"name": "Login Instituição",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -716,6 +1181,192 @@
 							"port": "3000",
 							"path": [
 								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Empresa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"empresa@gmail.com\",\r\n    \"senha\": \"empresa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Aluno",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"aluno@gmail.com\",\r\n    \"senha\": \"aluno\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Professor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"professor@gmail.com\",\r\n    \"senha\": \"professor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transação",
+			"item": [
+				{
+					"name": "Listar Transação By ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjY2NzcyODQ5LCJleHAiOjE2OTgzMDg4NDl9.1I6BzmSQv0_JxISU-OuGwWU0YE_CzxecIDozR9HBm6Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/transacao/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"transacao",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Transação",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjY3OTg5NDk0LCJleHAiOjE2OTk1MjU0OTR9.UY3BYzs7kxYFFE6linbum86EufnQxBQ_QPnS-qOQ1F8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"motivo\": \"Bom trabalho!\",\r\n    \"valor\": 100,\r\n    \"id_aluno\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/transacao",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"transacao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Transações",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjY2NzcyODQ5LCJleHAiOjE2OTgzMDg4NDl9.1I6BzmSQv0_JxISU-OuGwWU0YE_CzxecIDozR9HBm6Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/transacao",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"transacao"
 							]
 						}
 					},
