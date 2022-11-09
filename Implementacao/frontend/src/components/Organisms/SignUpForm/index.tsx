@@ -16,7 +16,7 @@ const SignUpForm = ({
   const componentMap = {
     business: BusinessSignUpForm,
     student: StudentSignUpForm,
-    professor: ProfessorSignupForm,
+    professor: ProfessorSignUpForm,
   }
 
   const Component = componentMap[type];

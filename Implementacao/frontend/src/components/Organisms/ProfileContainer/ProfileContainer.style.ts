@@ -25,3 +25,8 @@ export const DataEntry = styled.p`
     font-weight: ${(props) => props.theme.typography.fontWeight.bold};
   }
 `;
+
+export const Transfer = styled.div`
+  display: flex;
+  align-items: center;
+`
