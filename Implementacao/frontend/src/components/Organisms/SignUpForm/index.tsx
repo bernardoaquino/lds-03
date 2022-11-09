@@ -1,11 +1,13 @@
 import React from 'react';
 
+/** Components */
 import BusinessSignUpForm from './BusinessSignUpForm';
+import InstitutionSignUpForm from './InstitutionSignUpForm';
 import ProfessorSignUpForm from './ProfessorSignUpForm';
 import StudentSignUpForm from './StudentSignUpForm';
 
 type SignUpFormProps = {
-  type: 'business' | 'student' | 'professor';
+  type: 'business' | 'student' | 'professor' | 'institution';
   onSubmit: Function;
 }
 
@@ -15,6 +17,7 @@ const SignUpForm = ({
 }: SignUpFormProps) => {
   const componentMap = {
     business: BusinessSignUpForm,
+    institution: InstitutionSignUpForm,
     student: StudentSignUpForm,
     professor: ProfessorSignUpForm,
   }
