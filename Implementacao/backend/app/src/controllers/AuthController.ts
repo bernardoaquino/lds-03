@@ -6,6 +6,9 @@ import { alunoRepository } from '../repositories/alunoRepository';
 import { empresaRepository } from '../repositories/empresaRepository';
 import { instituicaoDeEnsinoRepository } from '../repositories/instituicaoDeEnsinoRepository';
 import { professorRepository } from '../repositories/professorRepository';
+import StudentRepository from '../repositories/StudentRepository';
+import InstituteRepository from '../repositories/InstituteRepository';
+import ProfessorRepository from '../repositories/ProfessorRepository';
 
 export class AuthController {
     async login(req: Request, res: Response) {
@@ -26,7 +29,7 @@ export class AuthController {
         }
     
         //Login - Aluno
-        const aluno = await alunoRepository.findOneBy({ email })
+        const aluno = await StudentRepository.getByEmail(email);
 
         if (aluno) {
             const token = await validatePassword(aluno.id, senha, aluno)
@@ -56,7 +59,7 @@ export class AuthController {
         }
 
         //Login - Instituição De Ensino
-        const instituicao = await instituicaoDeEnsinoRepository.findOneBy({ email })
+        const instituicao = await InstituteRepository.getByEmail(email);
 
         if(instituicao) {
             const token = await validatePassword(instituicao.id, senha, instituicao)
@@ -71,7 +74,9 @@ export class AuthController {
         }
 
         //Login - Professor
-        const professor = await professorRepository.findOneBy({ email })
+        const professor = await ProfessorRepository.getByEmail(email);
+
+        console.log('PROFESSOR > ', professor)
 
         if(professor) {
             const token = await validatePassword(professor.id, senha, professor)

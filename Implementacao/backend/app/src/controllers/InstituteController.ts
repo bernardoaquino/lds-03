@@ -1,20 +1,20 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import ProfessorRepository from '../repositories/ProfessorRepository';
+import InstituteRepository from '../repositories/InstituteRepository';
 
-class ProfessorController {
+class InstituteController {
     constructor() {}
     
     create = async (req: Request, res: Response) => {
         try {
-            const { professor, departmentId } = req.body;
+            const { institute } = req.body;
 
-            await ProfessorRepository.create(professor, departmentId);
+            await InstituteRepository.create(institute);
 
             return res.status(StatusCodes.CREATED).send();
         } catch (error: any) {
             return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-                error: 'PRF500C',
+                error: 'INS500C',
                 message: error?.message ?? 'No message'
             })
         }
@@ -23,18 +23,18 @@ class ProfessorController {
     update = async (req: Request, res: Response) => {
         try {
             const { id } = req.instituicaoDeEnsino;
-            const { professor, departmentId } = req.body;
+            const { institute } = req.body;
 
             if (!id) {
-                throw new Error('Ocorreu um erro ao recuperar informações do professor');
+                throw new Error('Ocorreu um erro ao recuperar informações da instituição');
             }
 
-            const updatedProfessor = await ProfessorRepository.update(id, professor, departmentId);
+            const updatedInstitute = await InstituteRepository.update(id, institute);
 
-            return res.status(StatusCodes.OK).json({ updatedProfessor });
+            return res.status(StatusCodes.OK).json({ updatedInstitute });
         } catch (error: any) {
             return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-                error: 'PRF500U',
+                error: 'INS500U',
                 message: error?.message ?? 'No message'
             })
         }
@@ -45,23 +45,23 @@ class ProfessorController {
             const { id } = req.body;
 
             if (!id) {
-                throw new Error('Você precisa fornecer o ID do professor a ser removido');
+                throw new Error('Você precisa fornecer o ID da instituição a ser removida');
             }
 
-            const deleted = await ProfessorRepository.delete(id);
+            const deleted = await InstituteRepository.delete(id);
 
             if (!deleted) {
-                throw new Error('Ocorreu um erro ao deletar o professor');
+                throw new Error('Ocorreu um erro ao deletar a instituição');
             }
 
             return res.status(StatusCodes.GONE).json({ deleted });
         } catch (error: any) {
             return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-                error: 'PRF500D',
+                error: 'INS500D',
                 message: error?.message ?? 'No message'
             })
         }
     }
 }
 
-export default new ProfessorController();
+export default new InstituteController();

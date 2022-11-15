@@ -1,20 +1,20 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import ProfessorRepository from '../repositories/ProfessorRepository';
+import BusinessRepository from '../repositories/BusinessRepository';
 
-class ProfessorController {
+class BusinessController {
     constructor() {}
     
     create = async (req: Request, res: Response) => {
         try {
-            const { professor, departmentId } = req.body;
+            const { business } = req.body;
 
-            await ProfessorRepository.create(professor, departmentId);
+            await BusinessRepository.create(business);
 
             return res.status(StatusCodes.CREATED).send();
         } catch (error: any) {
             return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-                error: 'PRF500C',
+                error: 'BUS500C',
                 message: error?.message ?? 'No message'
             })
         }
@@ -22,19 +22,19 @@ class ProfessorController {
 
     update = async (req: Request, res: Response) => {
         try {
-            const { id } = req.instituicaoDeEnsino;
-            const { professor, departmentId } = req.body;
+            const { id } = req.empresa;
+            const { business } = req.body;
 
             if (!id) {
-                throw new Error('Ocorreu um erro ao recuperar informações do professor');
+                throw new Error('Ocorreu um erro ao recuperar informações da empresa');
             }
 
-            const updatedProfessor = await ProfessorRepository.update(id, professor, departmentId);
+            const updatedBusiness = await BusinessRepository.update(id, business);
 
-            return res.status(StatusCodes.OK).json({ updatedProfessor });
+            return res.status(StatusCodes.OK).json({ updatedBusiness });
         } catch (error: any) {
             return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-                error: 'PRF500U',
+                error: 'BUS500U',
                 message: error?.message ?? 'No message'
             })
         }
@@ -45,23 +45,23 @@ class ProfessorController {
             const { id } = req.body;
 
             if (!id) {
-                throw new Error('Você precisa fornecer o ID do professor a ser removido');
+                throw new Error('Você precisa fornecer o ID da empresa a ser removida');
             }
 
-            const deleted = await ProfessorRepository.delete(id);
+            const deleted = await BusinessRepository.delete(id);
 
             if (!deleted) {
-                throw new Error('Ocorreu um erro ao deletar o professor');
+                throw new Error('Ocorreu um erro ao deletar a empresa');
             }
 
             return res.status(StatusCodes.GONE).json({ deleted });
         } catch (error: any) {
             return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-                error: 'PRF500D',
+                error: 'BUS500D',
                 message: error?.message ?? 'No message'
             })
         }
     }
 }
 
-export default new ProfessorController();
+export default new BusinessController();

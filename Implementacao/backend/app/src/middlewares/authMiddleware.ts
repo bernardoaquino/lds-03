@@ -7,7 +7,8 @@ import { alunoRepository } from '../repositories/alunoRepository';
 import { professorRepository } from '../repositories/professorRepository';
 
 type JwtPayload = {
-	id: number
+	id: number;
+	email: string;
 }
 
 export const authMiddleware = async (
@@ -23,12 +24,12 @@ export const authMiddleware = async (
 
 	const token = authorization.split(' ')[1]
 
-	const { id } = jwt.verify(token, process.env.JWT_PASS ?? '') as JwtPayload
+	const { id, email } = jwt.verify(token, process.env.JWT_PASS ?? '') as JwtPayload
 
 	let user
 
 	//Login - Instituição De Ensino
-	const instituicaoDeEnsino = await instituicaoDeEnsinoRepository.findOneBy({ id })
+	const instituicaoDeEnsino = await instituicaoDeEnsinoRepository.findOneBy({ id, email })
 
 	if (!!instituicaoDeEnsino) {
 		user = instituicaoDeEnsino
@@ -38,7 +39,7 @@ export const authMiddleware = async (
 	}
 
 	//Login - Empresa
-	const empresa = await empresaRepository.findOneBy({ id })
+	const empresa = await empresaRepository.findOneBy({ id, email })
 
 	if (!!empresa) {
 		user = empresa
@@ -48,7 +49,7 @@ export const authMiddleware = async (
 	}
 
 	//Login - Aluno
-	const aluno = await alunoRepository.findOneBy({ id })
+	const aluno = await alunoRepository.findOneBy({ id, email })
 
 	if (!!aluno) {
 		user = aluno
@@ -58,7 +59,7 @@ export const authMiddleware = async (
 	}
 
 	//Login - Professor
-	const professor = await professorRepository.findOneBy({ id })
+	const professor = await professorRepository.findOneBy({ id, email })
 
 	if (!!professor) {
 		user = professor

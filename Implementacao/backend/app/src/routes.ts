@@ -6,16 +6,74 @@ import { AuthController } from './controllers/AuthController';
 import { AlunoController } from './controllers/AlunoController';
 import { CursoController } from './controllers/CursoController';
 import { InstituicaoDeEnsinoController } from './controllers/InstituicaoDeEnsinoController';
+
+/** Middlewares */
 import { authMiddleware } from './middlewares/authMiddleware';
-import { ProfessorController } from './controllers/ProfessorController';
+
+/** Controllers */
+import BusinessController from './controllers/BusinessController';
+import CourseController from './controllers/CourseController';
+import DepartmentController from './controllers/DepartmentController';
+import InstituteController from './controllers/InstituteController';
+import ProfessorController from './controllers/ProfessorController';
+import StudentController from './controllers/StudentController';
+import TransferController from './controllers/TransferController';
+import AdvantageController from './controllers/AdvantageController';
 
 const routes = Router()
 
 routes.post('/login', new AuthController().login)
 
-routes.get('/instituicao', new InstituicaoDeEnsinoController().list)
+/** Business routes */
+routes.post('/business', BusinessController.create);
+routes.put('/business', authMiddleware, BusinessController.update);
+routes.delete('/business', authMiddleware, BusinessController.delete);
+
+/** Advantage routes */
+routes.post('/advantage', authMiddleware, AdvantageController.create);
+routes.put('/advantage/:id', authMiddleware, AdvantageController.update);
+routes.delete('/advantage/:id', authMiddleware, AdvantageController.delete);
+
+/** Institution routes */
+routes.post('/institution', InstituteController.create);
+routes.put('/institution', authMiddleware, InstituteController.update);
+routes.delete('/institution', authMiddleware, InstituteController.delete);
+
+/** Department routes */
+routes.post('/department', authMiddleware, DepartmentController.create);
+routes.put('/department/:id', authMiddleware, DepartmentController.update);
+routes.delete('/department/:id', authMiddleware, DepartmentController.delete);
+
+/** Course routes */
+routes.post('/course', authMiddleware, CourseController.create);
+routes.put('/course/:id', authMiddleware, CourseController.update);
+routes.delete('/course/:id', authMiddleware, CourseController.delete);
+
+/** Professor routes */
+routes.post('/professor', ProfessorController.create);
+routes.put('/professor', authMiddleware, ProfessorController.update);
+routes.delete('/professor', authMiddleware, ProfessorController.delete);
+
+/** Student routes */
+routes.post('/student', StudentController.create);
+routes.put('/student', authMiddleware, StudentController.update);
+routes.delete('/student', authMiddleware, StudentController.delete);
+routes.post('/student/advantage', authMiddleware, StudentController.acquireAdvantage);
+
+/** Transfer routes */
+routes.get('/transfer', authMiddleware, TransferController.list);
+routes.post('/transfer', authMiddleware, TransferController.create);
+
+
+
+
+
+
+
+
+routes.get('/institution/all', new InstituicaoDeEnsinoController().list)
 routes.get('/instituicao/:id', new InstituicaoDeEnsinoController().listOne)
-routes.post('/instituicao', new InstituicaoDeEnsinoController().create)
+routes.post('/institution', new InstituicaoDeEnsinoController().create)
 routes.put('/instituicao/:id', new InstituicaoDeEnsinoController().update)
 routes.delete('/instituicao/:id', new InstituicaoDeEnsinoController().destroy)
 
@@ -44,23 +102,25 @@ routes.post('/departamento', new DepartamentoController().create)
 routes.put('/departamento/:id', new DepartamentoController().update)
 routes.delete('/departamento/:id', new DepartamentoController().destroy)
 
-routes.get('/professor', new ProfessorController().list)
-routes.get('/professor/:id', new ProfessorController().listOne)
-routes.post('/professor', new ProfessorController().create)
-routes.delete('/professor/:id', new ProfessorController().destroy)
+// routes.get('/professor', new ProfessorController().list)
+// routes.get('/professor/:id', new ProfessorController().listOne)
+// routes.post('/professor', new ProfessorController().create)
+// routes.delete('/professor/:id', new ProfessorController().delete)
 
 routes.use(authMiddleware)
 
-routes.get('/perfil/aluno', new AlunoController().getProfile)
-routes.get('/perfil/empresa', new EmpresaController().getProfile)
-routes.get('/perfil/instituicao', new InstituicaoDeEnsinoController().getProfile)
-routes.get('/perfil/professor', new ProfessorController().getProfile)
-routes.put('/aluno/:id', new AlunoController().update)
-routes.put('/empresa/:id', new EmpresaController().update)
-routes.put('/professor/:id', new ProfessorController().update)
+// routes.put('/professor', new ProfessorController().update)
 
-routes.post('/transacao', new TransacaoController().create)
-routes.get('/transacao', new TransacaoController().list)
-routes.get('/transacao/:id', new TransacaoController().listOne)
+// routes.get('/perfil/aluno', new AlunoController().getProfile)
+// routes.get('/perfil/empresa', new EmpresaController().getProfile)
+// routes.get('/perfil/instituicao', new InstituicaoDeEnsinoController().getProfile)
+// routes.get('/perfil/professor', new ProfessorController().getProfile)
+// routes.put('/aluno/:id', new AlunoController().update)
+// routes.put('/empresa/:id', new EmpresaController().update)
+// // routes.put('/professor/:id', new ProfessorController().update)
+
+// routes.post('/transacao', new TransacaoController().create)
+// routes.get('/transacao', new TransacaoController().list)
+// routes.get('/transacao/:id', new TransacaoController().listOne)
 
 export default routes
