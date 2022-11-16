@@ -54,7 +54,10 @@ class InstituteRepository {
     }
 
     getDepartmentById = async (departmentId: number): Promise<Departamento | null> => {
-        const result = await this.departmentDataSource.findOneBy({ id: departmentId });
+        const result = await this.departmentDataSource.findOne({ 
+            where: { id: departmentId },
+            relations: ['instituicaoDeEnsino']
+         });
 
         return result;
     }
