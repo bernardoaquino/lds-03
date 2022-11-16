@@ -11,7 +11,10 @@ class ProfessorRepository {
     constructor() {}
 
     getById = async (id: number): Promise<Professor | null> => {
-        const professor = await this.dataSource.findOneBy({ id });
+        const professor = await this.dataSource.findOne({ 
+            where: { id },
+            relations: ['departamento']
+         });
 
         return professor;
     }

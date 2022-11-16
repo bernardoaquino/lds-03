@@ -1,11 +1,14 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import InstituteRepository from '../repositories/InstituteRepository';
+import ProfessorRepository from '../repositories/ProfessorRepository';
 import StudentRepository from '../repositories/StudentRepository';
 
 class StudentController {
     listAll = async (req: Request, res: Response) => {
         try {
-            const institutionId = req.professor.departamento?.instituicaoDeEnsino.id;
+            const departmentId = (await ProfessorRepository.getById(req.professor.id as number))?.departamento?.id;
+            const institutionId = (await InstituteRepository.getDepartmentById(departmentId as number))?.id
 
             if (!institutionId) {
                 throw new Error('Você precisa estar autenticado para listar alunos');
