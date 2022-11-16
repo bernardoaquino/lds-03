@@ -41,7 +41,7 @@ routes.put('/department/:id', authMiddleware, DepartmentController.update);
 routes.delete('/department/:id', authMiddleware, DepartmentController.delete);
 
 /** Course routes */
-routes.get('/course/:id', authMiddleware, CourseController.listAll);
+routes.get('/course/:id', CourseController.listAll);
 routes.post('/course', authMiddleware, CourseController.create);
 routes.put('/course/:id', authMiddleware, CourseController.update);
 routes.delete('/course/:id', authMiddleware, CourseController.delete);
