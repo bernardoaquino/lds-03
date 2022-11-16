@@ -58,6 +58,7 @@ routes.put('/professor', authMiddleware, ProfessorController.update);
 routes.delete('/professor', authMiddleware, ProfessorController.delete);
 
 /** Student routes */
+routes.get('/student', authMiddleware, StudentController.listAll);
 routes.post('/student', StudentController.create);
 routes.put('/student', authMiddleware, StudentController.update);
 routes.delete('/student', authMiddleware, StudentController.delete);

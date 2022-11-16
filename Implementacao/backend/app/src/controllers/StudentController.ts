@@ -4,7 +4,26 @@ import StudentRepository from '../repositories/StudentRepository';
 
 class StudentController {
     constructor() {}
-    
+
+    listAll = async (req: Request, res: Response) => {
+        try {
+            const institutionId = req.professor.departamento?.instituicaoDeEnsino.id;
+
+            if (!institutionId) {
+                throw new Error('Você precisa estar autenticado para listar alunos');
+            }
+
+            const students = await StudentRepository.getByInstitutionId(institutionId);
+
+            return res.status(StatusCodes.OK).json({ students });
+        } catch (error: any) {
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                error: 'STD500L',
+                message: error?.message ?? 'No message'
+            })
+        }
+    }
+
     create = async (req: Request, res: Response) => {
         try {
             const { student, courseId } = req.body;
