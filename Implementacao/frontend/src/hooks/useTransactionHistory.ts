@@ -12,6 +12,8 @@ type UseTransactionHistoryResponse = {
     refetch: Function;
 }
 
+const BASE_API_URL = `${process.env.REACT_APP_API_BASE_URL}/transfer`;
+
 const useTransactionHistory = (): UseTransactionHistoryResponse => {
     const { session } = useSession();
     const [history, setHistory] = useState<any>();
@@ -21,12 +23,12 @@ const useTransactionHistory = (): UseTransactionHistoryResponse => {
     const getTransactionHistory = useCallback(async (keepIsLoadingState = false) => {
         !keepIsLoadingState && setIsLoading(true);
 
-        const responseData = await fetch(`${process.env.REACT_APP_API_BASE_URL}/transacao`, {
+        const responseData = await fetch(BASE_API_URL, {
             headers: session.authHeaders
         })
 
         if (responseData.status === 200) {
-            const _history = await responseData.json();
+            const _history = (await responseData.json()).transferHistory;
 
             setHistory(_history);
             setError(false);

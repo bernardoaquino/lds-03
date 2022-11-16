@@ -2,12 +2,13 @@ import React, { useCallback } from 'react';
 
 /** Types */
 import { Field } from '../../../hooks/useForm';
+import { useStudentList } from '../../../hooks/useStudent';
 
 /** Components */
 import Form from '../../Molecules/Form';
 
 export type TransferData = {
-  id_aluno?: string;
+  studentId?: number;
   valor?: number;
   motivo?: string;
 }
@@ -19,21 +20,18 @@ type TransferFormProps = {
 const TransferForm = ({ 
   onSubmit
 }: TransferFormProps) => {
-  // const { alunos, isLoading, error } = useAlunos();
+  const { students, isLoading } = useStudentList();
 
-  // if (isLoading) {
-  //   return <>Carregando...</>
-  // }
-
-  // const alunosOptions = useCallback(alunos.map(aluno => ({
-
-  // })), [alunos])
+  if (isLoading) {
+    return <>Carregando...</>
+  }
 
   const transferFields: Field[] = [
     {
-      type: 'text',
+      type: 'select',
       label: 'Aluno',
-      name: 'id_aluno',
+      name: 'studentId',
+      options: students,
       required: true
     },
     {

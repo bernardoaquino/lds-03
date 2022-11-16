@@ -11,6 +11,7 @@ export type ProfessorData = {
   email?: string;
   senha?: string;
   cpf?: string;
+  qtdeMoedas?: number;
   id_instituicao?: string;
   id_departamento?: string;
 }

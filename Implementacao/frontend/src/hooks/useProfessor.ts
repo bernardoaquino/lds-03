@@ -23,14 +23,10 @@ const useProfessor = (): UseProfessorResponse => {
     const getProfessorData = useCallback(async (keepIsLoadingState = false) => {
         !keepIsLoadingState && setIsLoading(true);
 
-        const responseData = await fetch(`${process.env.REACT_APP_API_BASE_URL}/perfil/professor`, {
-            headers: session.authHeaders
-        })
+        const _professor = session?.data;
 
-        if (responseData.status === 200) {
-            const _professsor = await responseData.json();
-
-            setProfessor(_professsor);
+        if (_professor) {
+            setProfessor(_professor);
             setError(false);
         } else {
             setError(true);

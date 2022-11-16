@@ -15,6 +15,7 @@ import enableWhenFieldValueIsNotNull from '../../../utils/validators/enableWhenF
 import { Option } from '../../Atoms/FormField/Select';
 
 export type StudentData = {
+  id?: number;
   nome?: string;
   email?: string;
   senha?: string;
@@ -36,15 +37,13 @@ const StudentForm = ({
   values,
   onSubmit
 }: StudentFormProps) => {
-  // const [courses, setCourses] = useState<Option[]>([]);
   const { institutions, isLoading: isLoadingInstitutions } = useInstitutionList();
   const { courses, refetch: fetchCourses } = useCoursesList(values?.institutionId);
+  const localStorageLabel = 'studentForm'
 
-  // useEffect(() => {
-  //   if (coursesData) {
-  //     setCourses(coursesData);
-  //   }
-  // }, [coursesData])
+  useEffect(() => {
+    localStorage.removeItem(localStorageLabel);
+  }, []);
 
   if (isLoadingInstitutions) {
     return null
@@ -118,7 +117,7 @@ const StudentForm = ({
 
   return (
     <Form
-      localStorageLabel={'studentForm'}
+      localStorageLabel={localStorageLabel}
       onSubmit={onSubmit}
       fields={studentFields}
       validators={validators}
