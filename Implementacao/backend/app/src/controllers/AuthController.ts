@@ -9,7 +9,7 @@ import InstituteRepository from '../repositories/InstituteRepository';
 import ProfessorRepository from '../repositories/ProfessorRepository';
 import StudentRepository from '../repositories/StudentRepository';
 
-export class AuthController {
+class AuthController {
     private validatePassword = async (password: string, user: any, type: string): Promise<string> => {
         const verifySenha = await bcrypt.compare(password, user.senha);
         
@@ -26,7 +26,6 @@ export class AuthController {
 
     private handleLogin = async (type: string, email: string, senha: string, getByEmail: Function) => {
         const user = await getByEmail(email);
-
 
         if (user) {
             const token = await this.validatePassword(senha, user, type);
@@ -62,3 +61,5 @@ export class AuthController {
         throw new BadRequestError('E-mail ou senha inválidos')
     }
 }
+
+export default new AuthController();
