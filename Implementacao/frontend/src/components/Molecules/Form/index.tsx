@@ -1,32 +1,39 @@
-import React, { useMemo } from 'react';
+import React, { useEffect } from 'react';
 
 /** Hooks */
-import useForm, { Field } from '../../../hooks/useForm';
+import useForm, { Field, Form } from '../../../hooks/useForm';
 
 /** Types */
-import { Option as SelectOption, SelectProps } from "../../Atoms/FormField/Select";
 import KeyValuePair from '../../../types/KeyValuePair';
 
 /** Component */
 import Button from '../../Atoms/Button';
+import SelectField, { Option as SelectOption, SelectProps } from "../../Atoms/FormField/Select";
 import TextField, { TextFieldProps } from '../../Atoms/FormField/TextField';
-import SelectField from '../../Atoms/FormField/Select';
 
 /** Styles */
 import * as El from './Form.style';
 
 type FormProps = {
   fields: Field[];
+  localStorageLabel?: string;
+  validators?: ((fields: Field[]) => void)[];
   submitLabel?: string;
   onSubmit: Function;
 }
 
-const Form = ({
+const FormComponent = ({
   submitLabel = 'enviar',
   fields,
+  localStorageLabel,
+  validators,
   onSubmit
 }: FormProps) => {
-  const { updateFormField, isSubmittingForm, handleSubmit } = useForm(fields);
+  const { updateFormField, isSubmittingForm, handleSubmit } = useForm(fields, localStorageLabel);
+
+  useEffect(() => {
+    validators?.map(validatorFn => validatorFn(fields));
+  }, [validators, fields]);
 
   const onChangeMap: KeyValuePair<(field: Field) => any> = {
     default: (field: Field) => (e: React.ChangeEvent<HTMLInputElement>) => updateFormField(field, e.target.value),
@@ -69,7 +76,15 @@ const Form = ({
 
   const renderField = (field: Field) => {
     const { type } = field;
-    const fieldProps = getFieldProps(type, field)
+    const fieldProps = getFieldProps(type, field);
+
+    if (!field?.value) {
+      field.value = '';
+    }
+
+    if (field?.show === false) {
+      return null;
+    }
 
     if (type === 'select') {
       return <SelectField key={fieldProps.key} {...(fieldProps as SelectProps)} />;
@@ -85,7 +100,7 @@ const Form = ({
         {submitLabel}
       </Button>
     </El.Form>
-  )
+  );
 }
 
-export default Form;
+export default FormComponent;

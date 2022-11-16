@@ -25,7 +25,7 @@ const useTransfer = (): UseTransferResponse => {
         })
 
         return {
-            error: responseData.status !== 200
+            error: responseData.status !== 201
         }
     }
 

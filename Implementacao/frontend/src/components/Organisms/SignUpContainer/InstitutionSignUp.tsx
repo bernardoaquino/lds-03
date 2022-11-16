@@ -9,7 +9,7 @@ import { Form } from '../../../hooks/useForm';
 import { InstitutionData } from '../InstitutionForm';
 
 /** Hooks */
-import { useSignUpInstitution } from '../../../hooks/useSignUp';
+import { useSignUpInstitution } from '../../../hooks/useInstitution';
 
 /** Components */
 import SignUpForm from '../SignUpForm';
@@ -31,7 +31,7 @@ const InstitutionSignUp = () => {
 
   return (
     <El.Wrapper>
-      <El.Title>Crie sua conta de instituição</El.Title>
+      <El.Title>Crie sua conta de Instituição de Ensino</El.Title>
       <SignUpForm type={'institution'} onSubmit={handleSubmit} />
       <El.AlreadyHasAccount>Já possui conta? <a href={SIGNIN_URL}>Clique aqui para entrar</a></El.AlreadyHasAccount>
     </El.Wrapper>

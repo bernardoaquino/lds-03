@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 /** Types */
 import { Field } from '../../../hooks/useForm';
 
+/** Hooks */
+import { useCoursesList } from '../../../hooks/useCourse';
+import { useInstitutionList } from '../../../hooks/useInstitution';
+
 /** Components */
 import Form from '../../Molecules/Form';
+
+/** Validators */
+import enableWhenFieldValueIsNotNull from '../../../utils/validators/enableWhenFieldValueIsNotNull';
+import { Option } from '../../Atoms/FormField/Select';
 
 export type StudentData = {
   nome?: string;
@@ -13,8 +21,8 @@ export type StudentData = {
   rg?: string;
   cpf?: string;
   endereco?: string;
-  id_curso?: string;
-  id_instituicao?: string;
+  courseId?: string;
+  institutionId?: string;
 }
 
 type StudentFormProps = {
@@ -28,69 +36,92 @@ const StudentForm = ({
   values,
   onSubmit
 }: StudentFormProps) => {
+  // const [courses, setCourses] = useState<Option[]>([]);
+  const { institutions, isLoading: isLoadingInstitutions } = useInstitutionList();
+  const { courses, refetch: fetchCourses } = useCoursesList(values?.institutionId);
+
+  // useEffect(() => {
+  //   if (coursesData) {
+  //     setCourses(coursesData);
+  //   }
+  // }, [coursesData])
+
+  if (isLoadingInstitutions) {
+    return null
+  }
+
   const studentFields: Field[] = [
     {
       type: 'text',
       label: 'Nome',
       name: 'nome',
-      value: values?.nome || '',
+      value: values?.nome,
       required: true
     },
     {
       type: 'email',
       label: 'Email',
       name: 'email',
-      value: values?.email || '',
+      value: values?.email,
       required: true
     },
     {
       type: 'password',
       label: 'Senha',
       name: 'senha',
-      value: values?.senha || '',
+      value: values?.senha,
       required: true
     },
     {
       type: 'text',
       label: 'CPF',
       name: 'cpf',
-      value: values?.cpf || '',
+      value: values?.cpf,
       required: true
     },
     {
       type: 'text',
       label: 'RG',
       name: 'rg',
-      value: values?.rg || '',
+      value: values?.rg,
       required: true
     },
     {
       type: 'text',
       label: 'Endereco',
       name: 'endereco',
-      value: values?.endereco || '',
+      value: values?.endereco,
       required: true
     },
     {
-      type: 'text',
+      type: 'select',
+      label: 'Instituicao de Ensino',
+      name: 'institutionId',
+      value: values?.institutionId,
+      required: true,
+      options: institutions,
+      afterChange: (institutionId: number) => fetchCourses(institutionId)
+    },
+    {
+      type: 'select',
       label: 'Curso',
-      name: 'id_curso',
-      value: values?.id_curso || '',
-      required: true
+      name: 'courseId',
+      value: values?.courseId,
+      required: true,
+      options: courses,
     },
-    {
-      type: 'text',
-      label: 'Instituição de Ensino',
-      name: 'id_instituicao',
-      value: values?.id_instituicao || '',
-      required: true
-    },
+  ]
+
+  const validators = [
+    enableWhenFieldValueIsNotNull('institutionId', 'courseId'),
   ]
 
   return (
     <Form
+      localStorageLabel={'studentForm'}
       onSubmit={onSubmit}
       fields={studentFields}
+      validators={validators}
       submitLabel={editMode ? 'Salvar' : 'Finalizar cadastro'}
     />
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 /** Types */
 import { Field } from '../../../hooks/useForm';
@@ -19,6 +19,16 @@ type TransferFormProps = {
 const TransferForm = ({ 
   onSubmit
 }: TransferFormProps) => {
+  // const { alunos, isLoading, error } = useAlunos();
+
+  // if (isLoading) {
+  //   return <>Carregando...</>
+  // }
+
+  // const alunosOptions = useCallback(alunos.map(aluno => ({
+
+  // })), [alunos])
+
   const transferFields: Field[] = [
     {
       type: 'text',

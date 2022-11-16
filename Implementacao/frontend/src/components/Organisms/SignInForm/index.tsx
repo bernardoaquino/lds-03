@@ -15,7 +15,7 @@ const SignInForm = ({ onSubmit }: SignInFormProps) => {
     {
       type: 'email',
       label: 'Email',
-      name: 'login',
+      name: 'email',
       value: '',
       required: true
     },
