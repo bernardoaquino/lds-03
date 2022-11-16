@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 /** Hooks */
 import useTransactionHistory from '../../../hooks/useTransactionHistory';
@@ -9,13 +9,34 @@ import List from '../../Atoms/List';
 /** Styles */
 import * as El from './TransactionHistory.style';
 
-const TransactionHistory = () => {
-    const { history } = useTransactionHistory();
+type TransactionHistoryProps = {
+    refetch?: boolean;
+    updateRefetch?: Function
+}
+
+const TransactionHistory = ({
+    refetch, 
+    updateRefetch
+}: TransactionHistoryProps) => {
+    const { history, refetch: refetchTransactionHistory } = useTransactionHistory();
+
+    useEffect(() => {
+        if (refetch) {
+            refetchTransactionHistory();
+            updateRefetch?.();
+        }
+    }, [refetch, refetchTransactionHistory, updateRefetch]);
 
     return (
         <List 
             items={history}
-            render={(transaction: any) => (
+            render={(transaction: any) => transaction?.cupomGerado ? (
+                <El.Transaction>
+                    <El.DataEntry>
+                        <b>Cupom gerado: </b> {transaction.cupomGerado}
+                    </El.DataEntry>
+                </El.Transaction>
+            ) : (
                 <El.Transaction>
                     <El.DataEntry>
                         <b>Valor: </b> {transaction.valor}

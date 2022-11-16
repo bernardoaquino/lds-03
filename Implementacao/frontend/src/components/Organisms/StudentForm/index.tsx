@@ -21,6 +21,7 @@ export type StudentData = {
   senha?: string;
   rg?: string;
   cpf?: string;
+  qtdeMoedas?: number;
   endereco?: string;
   courseId?: string;
   institutionId?: string;

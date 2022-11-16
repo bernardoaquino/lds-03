@@ -5,7 +5,6 @@ export const PageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   min-height: 100vh;
   padding: ${(props) => props.theme.grid(10)} ${(props) => props.theme.grid(4)};
 `;

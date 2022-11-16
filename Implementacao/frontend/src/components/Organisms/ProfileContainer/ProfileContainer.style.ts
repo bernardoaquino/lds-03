@@ -15,6 +15,10 @@ export const Name = styled.h2`
   font-size: ${(props) => props.theme.typography.fontSize[24]};
 `;
 
+export const Subtitle = styled.h2`
+  font-size: ${(props) => props.theme.typography.fontSize[20]};
+`;
+
 export const DataEntry = styled.p`
   color: ${(props) => props.theme.color.neutral[75]};
   font-size: ${(props) => props.theme.typography.fontSize[14]};
@@ -25,6 +29,16 @@ export const DataEntry = styled.p`
     font-weight: ${(props) => props.theme.typography.fontWeight.bold};
   }
 `;
+
+export const Card = styled.div`
+  padding: ${(props) => props.theme.grid(2)};
+  background-color: ${(props) => props.theme.color.neutral[0]};
+  border: 1px solid ${(props) => props.theme.color.neutral[75]};
+  border-radius: ${(props) => props.theme.grid(1)};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
 
 export const Transfer = styled.div`
   display: flex;

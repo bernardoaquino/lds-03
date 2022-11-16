@@ -4,6 +4,7 @@ const FONT_SIZES = {
   12: getGridSize(1.5),
   14: getGridSize(1.75),
   16: getGridSize(2),
+  20: getGridSize(2.5),
   24: getGridSize(3),
   48: getGridSize(6)
 };
