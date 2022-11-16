@@ -15,6 +15,12 @@ class BusinessRepository {
         return business;
     }
 
+    getByCredentials = async (id: number, email: string): Promise<Empresa | null> => {
+        const business = await this.dataSource.findOneBy({ id, email });
+
+        return business;
+    }
+
     getByEmail = async (email: string): Promise<Empresa | null> => {
         const business = await this.dataSource.findOneBy({ email });
 

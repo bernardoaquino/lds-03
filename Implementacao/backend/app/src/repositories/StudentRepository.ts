@@ -41,6 +41,12 @@ class StudentRepository {
         return student;
     }
 
+    getByCredentials = async (id: number, email: string): Promise<Aluno | null> => {
+        const student = await this.dataSource.findOneBy({ id, email });
+
+        return student;
+    }
+
     getByEmail = async (email: string): Promise<Aluno | null> => {
         const student = await this.dataSource.findOneBy({ email });
 

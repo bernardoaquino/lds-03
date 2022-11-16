@@ -1,14 +1,28 @@
-import { instituicaoDeEnsinoRepository } from './../repositories/instituicaoDeEnsinoRepository';
 import { NextFunction, Request, Response } from 'express'
-import { UnauthorizedError } from '../helpers/api-erros'
 import jwt from 'jsonwebtoken'
-import { empresaRepository } from '../repositories/empresaRepository';
-import { alunoRepository } from '../repositories/alunoRepository';
-import { professorRepository } from '../repositories/professorRepository';
+
+/** Error Types */
+import { UnauthorizedError } from '../helpers/api-erros'
+
+/** Repositories */
+import InstituteRepository from '../repositories/InstituteRepository';
+import BusinessRepository from '../repositories/BusinessRepository';
+import StudentRepository from '../repositories/StudentRepository';
+import ProfessorRepository from '../repositories/ProfessorRepository';
 
 type JwtPayload = {
 	id: number;
 	email: string;
+}
+
+const validateAndSetReq = async (varName: ('instituicaoDeEnsino' | 'empresa' | 'aluno' | 'professor') , id: number, email: string, req: Request, getUserByCredentials: Function) => {
+	const user = await getUserByCredentials(id, email);
+
+	if (!!user) {
+		const { senha: _, userData } = user;
+
+		req[varName] = userData;
+	}
 }
 
 export const authMiddleware = async (
@@ -19,58 +33,21 @@ export const authMiddleware = async (
 	const { authorization } = req.headers
 
 	if (!authorization) {
-		throw new UnauthorizedError('Não autorizado')
+		throw new UnauthorizedError('Não autorizado');
 	}
 
-	const token = authorization.split(' ')[1]
+	const token = authorization.split(' ')[1];
 
-	const { id, email } = jwt.verify(token, process.env.JWT_PASS ?? '') as JwtPayload
+	const { id, email } = jwt.verify(token, process.env.JWT_PASS ?? '') as JwtPayload;
 
-	let user
+	validateAndSetReq('instituicaoDeEnsino', id, email, req, InstituteRepository.getByCredentials);
+	validateAndSetReq('empresa', id, email, req, BusinessRepository.getByCredentials);
+	validateAndSetReq('aluno', id, email, req, StudentRepository.getByCredentials);
+	validateAndSetReq('professor', id, email, req, ProfessorRepository.getByCredentials);
 
-	//Login - Instituição De Ensino
-	const instituicaoDeEnsino = await instituicaoDeEnsinoRepository.findOneBy({ id, email })
-
-	if (!!instituicaoDeEnsino) {
-		user = instituicaoDeEnsino
-
-		const { senha: _, ...logedUser } = user
-		req.instituicaoDeEnsino = logedUser
+	if (!req?.instituicaoDeEnsino && !req?.empresa && !req?.aluno && !req?.professor) {
+		throw new UnauthorizedError('Não autorizado');
 	}
 
-	//Login - Empresa
-	const empresa = await empresaRepository.findOneBy({ id, email })
-
-	if (!!empresa) {
-		user = empresa
-
-		const { senha: _, ...logedUser } = user
-		req.empresa = logedUser
-	}
-
-	//Login - Aluno
-	const aluno = await alunoRepository.findOneBy({ id, email })
-
-	if (!!aluno) {
-		user = aluno
-
-		const { senha: _, ...logedUser } = user
-		req.aluno = logedUser
-	}
-
-	//Login - Professor
-	const professor = await professorRepository.findOneBy({ id, email })
-
-	if (!!professor) {
-		user = professor
-
-		const { senha: _, ...logedUser } = user
-		req.professor = logedUser
-	}
-
-	if (!user) {
-		throw new UnauthorizedError('Não autorizado')
-	}
-
-	next()
+	next();
 }
