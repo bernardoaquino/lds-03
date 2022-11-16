@@ -5,6 +5,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import { 
   BUSINESS_PROFILE_URL, 
   BUSINESS_SIGNUP_URL,
+  INSTITUTION_PROFILE_URL, 
+  INSTITUTION_SIGNUP_URL,
   PROFESSOR_PROFILE_URL, 
   PROFESSOR_SIGNUP_URL, 
   STUDENT_PROFILE_URL, 
@@ -14,11 +16,13 @@ import {
 
 import SignIn from './pages/SignIn';
 import BusinessSignUp from './pages/SignUp/BusinessSignUp';
-import ProfessorSignUp from './pages/SignUp/ProfessorSignUp';
-import StudentSignUp from './pages/SignUp/StudentSignUp';
 import BusinessProfile from './pages/Profile/BusinessProfile';
-import ProfessorProfile from './pages/Profile/ProfessorProfile';
+import InstitutionSignUp from './pages/SignUp/InstitutionSignUp';
+import InstitutionProfile from './pages/Profile/InstitutionProfile';
+import StudentSignUp from './pages/SignUp/StudentSignUp';
 import StudentProfile from './pages/Profile/StudentProfile';
+import ProfessorProfile from './pages/Profile/ProfessorProfile';
+import ProfessorSignUp from './pages/SignUp/ProfessorSignUp';
 
 const routes = [
   {
@@ -30,12 +34,24 @@ const routes = [
     element: <SignIn />
   },
   {
-    path: STUDENT_SIGNUP_URL,
-    element: <StudentSignUp />
+    path: BUSINESS_PROFILE_URL,
+    element: <BusinessProfile />
   },
   {
     path: BUSINESS_SIGNUP_URL,
     element: <BusinessSignUp />
+  },
+  {
+    path: INSTITUTION_PROFILE_URL,
+    element: <InstitutionProfile />
+  },
+  {
+    path: INSTITUTION_SIGNUP_URL,
+    element: <InstitutionSignUp />
+  },
+  {
+    path: PROFESSOR_PROFILE_URL,
+    element: <ProfessorProfile />
   },
   {
     path: PROFESSOR_SIGNUP_URL,
@@ -46,12 +62,8 @@ const routes = [
     element: <StudentProfile />
   },
   {
-    path: PROFESSOR_PROFILE_URL,
-    element: <ProfessorProfile />
-  },
-  {
-    path: BUSINESS_PROFILE_URL,
-    element: <BusinessProfile />
+    path: STUDENT_SIGNUP_URL,
+    element: <StudentSignUp />
   },
 ]
 

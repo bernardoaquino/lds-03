@@ -52,6 +52,9 @@ const ProfessorProfile = () => {
         <Button onClick={() => setIsTransferModalOpen(true)} color={'primary'}>enviar moedas</Button>
       </El.Transfer>
       <El.DataEntry>
+        <b>Saldo</b>: {professor?.qtdeMoedas} moedas
+      </El.DataEntry>
+      <El.DataEntry>
         <b>CPF</b>: {professor?.cpf}
       </El.DataEntry>
       <TransactionHistory />

@@ -31,8 +31,6 @@ const Select = ({
   useEffect(() => {
     if (selected) {
       setSelected(selected);
-    } else if (!_selected) {
-      handleChange();
     }
   }, [selected, setSelected])
 
@@ -52,8 +50,9 @@ const Select = ({
     <El.Container key={key}>
       <El.Label htmlFor={name}>{label}</El.Label>
       <El.Select name={name} onChange={handleChange} defaultValue={_selectedIndex}>
+        <El.Option disabled selected> -- select an option -- </El.Option>
         {options.map((option, index) => (
-          <El.Option value={index}>{option.label}</El.Option>
+          <El.Option key={`${name}-${index}`} value={index}>{option.label}</El.Option>
         ))}
       </El.Select>
     </El.Container>

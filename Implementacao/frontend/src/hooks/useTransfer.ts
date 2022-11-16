@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 
 /** Hooks */
 import { useSession } from "../providers/Auth"
@@ -14,18 +15,33 @@ type TransferResponse = {
     error: boolean;
 }
 
+const BASE_API_URL = `${process.env.REACT_APP_API_BASE_URL}/transfer`;
+
 const useTransfer = (): UseTransferResponse => {
     const { session } = useSession();
 
     const transfer = async (transfer: TransferData) => {
-        const responseData = await fetch(`${process.env.REACT_APP_API_BASE_URL}/transacao`, {
+        const { studentId, ...transferData } = transfer;
+
+        const responseData = await fetch(BASE_API_URL, {
             method: 'POST',
-            body: JSON.stringify(transfer),
+            body: JSON.stringify({
+                transfer: transferData,
+                studentId
+            }),
             headers: session.authHeaders
         })
 
+        const sentMoneySuccessfully = responseData.status !== 201;
+
+        if (sentMoneySuccessfully) {
+            toast.success('Moedas enviadas com sucesso');
+        } else {
+            toast.error('Ocorreu um erro ao enviar as moedas, cheque o seu saldo');
+        }
+
         return {
-            error: responseData.status !== 200
+            error: sentMoneySuccessfully
         }
     }
 

@@ -18,13 +18,15 @@ type SessionContext = {
 
 type Session = {
     name: string;
+    data: Object;
     token: string;
     authHeaders?: KeyValuePair<string>;
-    userType?: 'business' | 'student' | 'institution';
+    userType?: 'business' | 'student' | 'institution' | 'professor';
 };
 
 const DEFAULT_SESSION = {
     name: '',
+    data: {},
     token: '',
     userType: undefined,
     authHeaders: {

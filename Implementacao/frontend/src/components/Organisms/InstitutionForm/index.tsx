@@ -7,12 +7,10 @@ import { Field } from '../../../hooks/useForm';
 import Form from '../../Molecules/Form';
 
 export type InstitutionData = {
+  id?: number;
   nome?: string;
   email?: string;
   senha?: string;
-  cpf?: string;
-  id_instituicao?: string;
-  id_departamento?: string;
 }
 
 type InstitutionFormProps = {

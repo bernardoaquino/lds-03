@@ -37,15 +37,16 @@ const useSignIn = () => {
 
       updateSession({
         name: responseBody.user.nome,
+        data: responseBody.user,
         token: responseBody.token,
         userType: responseBody?.userType
       });
 
       return {
-        userType: successfullyLoggedIn && responseBody?.userType,
-        user: successfullyLoggedIn && responseBody,
-        error: !successfullyLoggedIn,
-        errorMessage: !successfullyLoggedIn ? String(responseBody) : ''
+        userType: responseBody?.userType,
+        user: responseBody,
+        error: false,
+        errorMessage: ''
       }
     }
 
