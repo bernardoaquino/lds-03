@@ -36,7 +36,10 @@ class StudentRepository {
     }
     
     getById = async (id: number): Promise<Aluno | null> => {
-        const student = await this.dataSource.findOneBy({ id });
+        const student = await this.dataSource.findOne({ 
+            where: { id },
+            relations: ['instituicaoDeEnsino']
+         });
 
         return student;
     }

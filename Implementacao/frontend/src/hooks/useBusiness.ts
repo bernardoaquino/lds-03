@@ -23,18 +23,14 @@ const useBusiness = (): UseBusinessResponse => {
     const getBusinessData = useCallback(async (keepIsLoadingState = false) => {
         !keepIsLoadingState && setIsLoading(true);
 
-        const responseData = await fetch(`${process.env.REACT_APP_API_BASE_URL}/perfil/empresa`, {
-            headers: session.authHeaders
-        })
+        const _business = session?.data;
 
-        if (responseData.status === 200) {
-            const _business = await responseData.json();
-
+        if (_business) {
             setBusiness(_business);
             setError(false);
         } else {
             setError(true);
-            toast.error('Ocorreu um erro ao recuperar os dados da empresa');
+            toast.error('Ocorreu um erro ao recuperar os dados');
         }
 
         setIsLoading(false);

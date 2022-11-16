@@ -4,11 +4,13 @@ import React, { useState } from 'react';
 import { Form } from '../../../hooks/useForm';
 
 /** Hooks */
+import { useAcquireAdvantage, useAdvantages } from '../../../hooks/useAdvantage';
 import useStudent from '../../../hooks/useStudent';
 import useUpdateStudent from '../../../hooks/useUpdateStudent';
 
 /** Components */
 import Button from '../../Atoms/Button';
+import List from '../../Atoms/List';
 import Modal from '../../Molecules/Modal';
 import StudentForm, { StudentData } from '../StudentForm';
 import TransactionHistory from '../TransactionHistory';
@@ -17,8 +19,11 @@ import TransactionHistory from '../TransactionHistory';
 import * as El from './ProfileContainer.style';
 
 const StudentProfile = () => {
+  const [updateTransferHistory, setUpdateTransferHistory] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { student, refetch } = useStudent(); 
+  const { acquireAdvantage } = useAcquireAdvantage();
+  const { advantages, refetch: refetchAdvantages } = useAdvantages(); 
+  const { student, refetch } = useStudent();
   const { update } = useUpdateStudent();
 
   const handleSubmit = (formValues: Form) => {
@@ -26,6 +31,15 @@ const StudentProfile = () => {
       if (!response.error) {
         refetch();
         setIsModalOpen(false);
+      }
+    });
+  }
+
+  const handleAcquireAdvantage = (advantageId: number) => {
+    acquireAdvantage(advantageId).then((response: any) => {
+      if (!response.error) {
+        refetchAdvantages();
+        setUpdateTransferHistory(true);
       }
     });
   }
@@ -45,7 +59,33 @@ const StudentProfile = () => {
       <El.DataEntry>
         <b>Endereco</b>: {student?.endereco}
       </El.DataEntry>
-      <TransactionHistory />
+      <El.DataEntry>
+        <b>Quantidade de moedas</b>: {student?.qtdeMoedas}
+      </El.DataEntry>
+
+      <El.Subtitle>Vantagens disponíveis</El.Subtitle>
+      <List
+        items={advantages}
+        render={(advantage: any) => (
+          <El.Card>
+            <El.Wrapper>
+              <El.DataEntry>
+                <b>Vantagem</b>: {advantage?.nome}
+              </El.DataEntry>
+              <El.DataEntry>
+                <b>Custo moedas</b>: {advantage?.custoMoedas}
+              </El.DataEntry>
+              <El.DataEntry>
+                {advantage?.descricao}
+              </El.DataEntry>
+            </El.Wrapper>
+            <Button onClick={() => handleAcquireAdvantage(advantage.id)}>adquirir</Button>
+          </El.Card>
+        )}
+      />
+
+      <El.Subtitle>Extrato</El.Subtitle>
+      <TransactionHistory refetch={updateTransferHistory} updateRefetch={() => setUpdateTransferHistory(false)} />
       <Modal
         title={'editar dados'}
         open={isModalOpen}

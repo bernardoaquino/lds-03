@@ -24,6 +24,8 @@ routes.put('/business', authMiddleware, BusinessController.update);
 routes.delete('/business', authMiddleware, BusinessController.delete);
 
 /** Advantage routes */
+routes.get('/advantage/business', authMiddleware, AdvantageController.listAllOwnedByBusiness);
+routes.get('/advantage/all', authMiddleware, AdvantageController.listAll);
 routes.post('/advantage', authMiddleware, AdvantageController.create);
 routes.put('/advantage/:id', authMiddleware, AdvantageController.update);
 routes.delete('/advantage/:id', authMiddleware, AdvantageController.delete);

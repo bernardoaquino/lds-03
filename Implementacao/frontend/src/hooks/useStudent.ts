@@ -33,18 +33,14 @@ const useStudent = (): UseStudentResponse => {
     const getStudentData = useCallback(async (keepIsLoadingState = false) => {
         !keepIsLoadingState && setIsLoading(true);
 
-        const responseData = await fetch(`${process.env.REACT_APP_API_BASE_URL}/perfil/aluno`, {
-            headers: session.authHeaders
-        })
+        const _student = session?.data;
 
-        if (responseData.status === 200) {
-            const _student = await responseData.json();
-
+        if (_student) {
             setStudent(_student);
             setError(false);
         } else {
             setError(true);
-            toast.error('Ocorreu um erro ao recuperar os dados da empresa');
+            toast.error('Ocorreu um erro ao recuperar os dados');
         }
 
         setIsLoading(false);
