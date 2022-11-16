@@ -15,14 +15,16 @@ type JwtPayload = {
 	email: string;
 }
 
-const validateAndSetReq = async (varName: ('instituicaoDeEnsino' | 'empresa' | 'aluno' | 'professor') , id: number, email: string, req: Request, getUserByCredentials: Function) => {
+const validateAndSetReq = async (id: number, email: string, getUserByCredentials: Function) => {
 	const user = await getUserByCredentials(id, email);
 
 	if (!!user) {
-		const { senha: _, userData } = user;
+		const { senha: _, ...userData } = user;
 
-		req[varName] = userData;
+		return userData;
 	}
+
+	return null
 }
 
 export const authMiddleware = async (
@@ -40,10 +42,10 @@ export const authMiddleware = async (
 
 	const { id, email } = jwt.verify(token, process.env.JWT_PASS ?? '') as JwtPayload;
 
-	validateAndSetReq('instituicaoDeEnsino', id, email, req, InstituteRepository.getByCredentials);
-	validateAndSetReq('empresa', id, email, req, BusinessRepository.getByCredentials);
-	validateAndSetReq('aluno', id, email, req, StudentRepository.getByCredentials);
-	validateAndSetReq('professor', id, email, req, ProfessorRepository.getByCredentials);
+	req.instituicaoDeEnsino = await validateAndSetReq(id, email, InstituteRepository.getByCredentials);
+	req.empresa = await validateAndSetReq(id, email, BusinessRepository.getByCredentials);
+	req.aluno = await validateAndSetReq(id, email, StudentRepository.getByCredentials);
+	req.professor = await validateAndSetReq(id, email, ProfessorRepository.getByCredentials);
 
 	if (!req?.instituicaoDeEnsino && !req?.empresa && !req?.aluno && !req?.professor) {
 		throw new UnauthorizedError('Não autorizado');
