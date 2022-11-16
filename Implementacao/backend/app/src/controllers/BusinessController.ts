@@ -3,8 +3,6 @@ import { StatusCodes } from 'http-status-codes';
 import BusinessRepository from '../repositories/BusinessRepository';
 
 class BusinessController {
-    constructor() {}
-    
     create = async (req: Request, res: Response) => {
         try {
             const { business } = req.body;

@@ -7,8 +7,6 @@ import StudentRepository from '../repositories/StudentRepository';
 import TransferRepository from '../repositories/TransferRepository';
 
 class TransferController {
-    constructor() {}
-    
     create = async (req: Request, res: Response) => {
         try {
             const { id } = req.professor;

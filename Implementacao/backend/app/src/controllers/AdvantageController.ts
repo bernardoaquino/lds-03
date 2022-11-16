@@ -6,8 +6,6 @@ import AdvantageRepository from '../repositories/AdvantageRepository';
 import BusinessRepository from '../repositories/BusinessRepository';
 
 class AdvantageController {
-    constructor() {}
-
     create = async (req: Request, res: Response) => {
         try {
             const { id } = req.empresa;
@@ -69,18 +67,19 @@ class AdvantageController {
         try {
             const { id: businessId } = req.empresa;
             const { id } = req.params;
+            const advantageId = Number(id);
 
             if (!id) {
                 throw new Error('Você precisa fornecer o ID da vantagem a ser removido');
             }
 
-            const advantage = await AdvantageRepository.getById(id);
+            const advantage = await AdvantageRepository.getById(advantageId);
 
             if (advantage?.empresa.id !== businessId) {
                 throw new Error('A vantagem selecionado não pertence a essa empresa');
             }
 
-            const deleted = await AdvantageRepository.delete(id);
+            const deleted = await AdvantageRepository.delete(advantageId);
 
             if (!deleted) {
                 throw new Error('Ocorreu um erro ao deletar a vantagem');

@@ -3,8 +3,6 @@ import { StatusCodes } from 'http-status-codes';
 import InstituteRepository from '../repositories/InstituteRepository';
 
 class DepartmentController {
-    constructor() {}
-
     listAll = async (req: Request, res: Response) => {
         try {
             const { id: institutionIdStr } = req.params;
@@ -82,18 +80,19 @@ class DepartmentController {
         try {
             const { id: institutionId } = req.instituicaoDeEnsino;
             const { id } = req.params;
+            const departmentId = Number(id);
 
             if (!id) {
                 throw new Error('Você precisa fornecer o ID do departamento a ser removido');
             }
 
-            const department = await InstituteRepository.getDepartmentById(id);
+            const department = await InstituteRepository.getDepartmentById(departmentId);
 
             if (department?.instituicaoDeEnsino.id !== institutionId) {
                 throw new Error('O departamento selecionado não pertence a essa instituição');
             }
 
-            const deleted = await InstituteRepository.deleteDepartment(id);
+            const deleted = await InstituteRepository.deleteDepartment(departmentId);
 
             if (!deleted) {
                 throw new Error('Ocorreu um erro ao deletar o departamento');

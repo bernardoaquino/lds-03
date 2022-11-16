@@ -3,8 +3,6 @@ import { StatusCodes } from 'http-status-codes';
 import InstituteRepository from '../repositories/InstituteRepository';
 
 class CourseController {
-    constructor() {}
-
     listAll = async (req: Request, res: Response) => {
         try {
             const { id: institutionIdStr } = req.params;

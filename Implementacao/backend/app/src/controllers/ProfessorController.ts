@@ -3,8 +3,6 @@ import { StatusCodes } from 'http-status-codes';
 import ProfessorRepository from '../repositories/ProfessorRepository';
 
 class ProfessorController {
-    constructor() {}
-    
     create = async (req: Request, res: Response) => {
         try {
             const { professor, departmentId } = req.body;

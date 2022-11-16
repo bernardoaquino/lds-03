@@ -3,8 +3,6 @@ import { StatusCodes } from 'http-status-codes';
 import StudentRepository from '../repositories/StudentRepository';
 
 class StudentController {
-    constructor() {}
-
     listAll = async (req: Request, res: Response) => {
         try {
             const institutionId = req.professor.departamento?.instituicaoDeEnsino.id;

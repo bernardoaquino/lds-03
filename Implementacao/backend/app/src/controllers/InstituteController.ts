@@ -3,8 +3,6 @@ import { StatusCodes } from 'http-status-codes';
 import InstituteRepository from '../repositories/InstituteRepository';
 
 class InstituteController {
-    constructor() {}
-
     listAll = async (req: Request, res: Response) => {
         try {
             const institutions = await InstituteRepository.listAll();
