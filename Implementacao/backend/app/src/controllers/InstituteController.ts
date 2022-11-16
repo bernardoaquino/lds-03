@@ -4,7 +4,20 @@ import InstituteRepository from '../repositories/InstituteRepository';
 
 class InstituteController {
     constructor() {}
-    
+
+    listAll = async (req: Request, res: Response) => {
+        try {
+            const institutions = await InstituteRepository.listAll();
+
+            return res.status(StatusCodes.OK).json({ institutions });
+        } catch (error: any) {
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                error: 'INS500C',
+                message: error?.message ?? 'No message'
+            })
+        }
+    }
+
     create = async (req: Request, res: Response) => {
         try {
             const { institute } = req.body;

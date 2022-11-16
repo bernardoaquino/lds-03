@@ -5,6 +5,22 @@ import InstituteRepository from '../repositories/InstituteRepository';
 class DepartmentController {
     constructor() {}
 
+    listAll = async (req: Request, res: Response) => {
+        try {
+            const { id: institutionIdStr } = req.params;
+            const institutionId = Number(institutionIdStr);
+
+            const departments = await InstituteRepository.getDepartmentsByInstitutionId(institutionId);
+
+            return res.status(StatusCodes.OK).json({ departments });
+        } catch (error: any) {
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                error: 'DPT500L',
+                message: error?.message ?? 'No message'
+            })
+        }
+    }
+
     create = async (req: Request, res: Response) => {
         try {
             const { id } = req.instituicaoDeEnsino;

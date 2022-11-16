@@ -35,16 +35,19 @@ routes.put('/advantage/:id', authMiddleware, AdvantageController.update);
 routes.delete('/advantage/:id', authMiddleware, AdvantageController.delete);
 
 /** Institution routes */
+routes.get('/institution/all', InstituteController.listAll);
 routes.post('/institution', InstituteController.create);
 routes.put('/institution', authMiddleware, InstituteController.update);
 routes.delete('/institution', authMiddleware, InstituteController.delete);
 
 /** Department routes */
+routes.get('/department/:id', DepartmentController.listAll)
 routes.post('/department', authMiddleware, DepartmentController.create);
 routes.put('/department/:id', authMiddleware, DepartmentController.update);
 routes.delete('/department/:id', authMiddleware, DepartmentController.delete);
 
 /** Course routes */
+routes.get('/course/:id', authMiddleware, CourseController.listAll);
 routes.post('/course', authMiddleware, CourseController.create);
 routes.put('/course/:id', authMiddleware, CourseController.update);
 routes.delete('/course/:id', authMiddleware, CourseController.delete);

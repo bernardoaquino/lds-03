@@ -13,6 +13,23 @@ class InstituteRepository {
 
     constructor() {}
 
+    getCoursesByInstitutionId = async (institutionId: number): Promise<Curso[]> => {
+        const institution = await this.getById(institutionId);
+
+        if (!institution) {
+            throw new Error('Instituição não encontrada');
+        }
+
+        const result = await this.courseDataSource.find({ 
+            where: {
+                instituicaoDeEnsino: institution
+            }, 
+            relations: ['instituicaoDeEnsino'] 
+        });
+
+        return result;
+    }
+
     getCourseById = async (courseId: number): Promise<Curso | null> => {
         const result = await this.courseDataSource.findOne({ 
             where: {
@@ -22,6 +39,18 @@ class InstituteRepository {
         });
 
         return result;
+    }
+
+    getDepartmentsByInstitutionId = async (institutionId: number): Promise<Departamento[]> => {
+        const institution = await this.getById(institutionId);
+
+        if (!institution) {
+            throw new Error('Instituição não encontrada');
+        }
+
+        const departments = await this.departmentDataSource.findBy({ instituicaoDeEnsino: institution });
+
+        return departments;
     }
 
     getDepartmentById = async (departmentId: number): Promise<Departamento | null> => {
@@ -40,6 +69,12 @@ class InstituteRepository {
         const institution = await this.dataSource.findOneBy({ email });
 
         return institution;
+    }
+
+    listAll = async (): Promise<InstituicaoDeEnsino[]> => {
+        const institutions = await this.dataSource.find();
+
+        return institutions;
     }
     
     create = async (institution: InstituicaoDeEnsino): Promise<InstituicaoDeEnsino> => {

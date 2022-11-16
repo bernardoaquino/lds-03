@@ -5,6 +5,22 @@ import InstituteRepository from '../repositories/InstituteRepository';
 class CourseController {
     constructor() {}
 
+    listAll = async (req: Request, res: Response) => {
+        try {
+            const { id: institutionIdStr } = req.params;
+            const institutionId = Number(institutionIdStr);
+
+            const courses = await InstituteRepository.getCoursesByInstitutionId(institutionId);
+
+            return res.status(StatusCodes.OK).json({ courses })
+        } catch (error: any) {
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                error: 'CRS500L',
+                message: error?.message ?? 'No message'
+            })
+        }
+    }
+
     create = async (req: Request, res: Response) => {
         try {
             const { id } = req.instituicaoDeEnsino;
