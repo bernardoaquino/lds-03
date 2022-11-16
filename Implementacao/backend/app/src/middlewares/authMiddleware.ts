@@ -1,13 +1,30 @@
-import { instituicaoDeEnsinoRepository } from './../repositories/instituicaoDeEnsinoRepository';
 import { NextFunction, Request, Response } from 'express'
-import { UnauthorizedError } from '../helpers/api-erros'
 import jwt from 'jsonwebtoken'
-import { empresaRepository } from '../repositories/empresaRepository';
-import { alunoRepository } from '../repositories/alunoRepository';
-import { professorRepository } from '../repositories/professorRepository';
+
+/** Error Types */
+import { UnauthorizedError } from '../helpers/api-erros'
+
+/** Repositories */
+import InstituteRepository from '../repositories/InstituteRepository';
+import BusinessRepository from '../repositories/BusinessRepository';
+import StudentRepository from '../repositories/StudentRepository';
+import ProfessorRepository from '../repositories/ProfessorRepository';
 
 type JwtPayload = {
-	id: number
+	id: number;
+	email: string;
+}
+
+const validateAndSetReq = async (id: number, email: string, getUserByCredentials: Function) => {
+	const user = await getUserByCredentials(id, email);
+
+	if (!!user) {
+		const { senha: _, ...userData } = user;
+
+		return userData;
+	}
+
+	return null
 }
 
 export const authMiddleware = async (
@@ -18,58 +35,21 @@ export const authMiddleware = async (
 	const { authorization } = req.headers
 
 	if (!authorization) {
-		throw new UnauthorizedError('Não autorizado')
+		throw new UnauthorizedError('Não autorizado');
 	}
 
-	const token = authorization.split(' ')[1]
+	const token = authorization.split(' ')[1];
 
-	const { id } = jwt.verify(token, process.env.JWT_PASS ?? '') as JwtPayload
+	const { id, email } = jwt.verify(token, process.env.JWT_PASS ?? '') as JwtPayload;
 
-	let user
+	req.instituicaoDeEnsino = await validateAndSetReq(id, email, InstituteRepository.getByCredentials);
+	req.empresa = await validateAndSetReq(id, email, BusinessRepository.getByCredentials);
+	req.aluno = await validateAndSetReq(id, email, StudentRepository.getByCredentials);
+	req.professor = await validateAndSetReq(id, email, ProfessorRepository.getByCredentials);
 
-	//Login - Instituição De Ensino
-	const instituicaoDeEnsino = await instituicaoDeEnsinoRepository.findOneBy({ id })
-
-	if (!!instituicaoDeEnsino) {
-		user = instituicaoDeEnsino
-
-		const { senha: _, ...logedUser } = user
-		req.instituicaoDeEnsino = logedUser
+	if (!req?.instituicaoDeEnsino && !req?.empresa && !req?.aluno && !req?.professor) {
+		throw new UnauthorizedError('Não autorizado');
 	}
 
-	//Login - Empresa
-	const empresa = await empresaRepository.findOneBy({ id })
-
-	if (!!empresa) {
-		user = empresa
-
-		const { senha: _, ...logedUser } = user
-		req.empresa = logedUser
-	}
-
-	//Login - Aluno
-	const aluno = await alunoRepository.findOneBy({ id })
-
-	if (!!aluno) {
-		user = aluno
-
-		const { senha: _, ...logedUser } = user
-		req.aluno = logedUser
-	}
-
-	//Login - Professor
-	const professor = await professorRepository.findOneBy({ id })
-
-	if (!!professor) {
-		user = professor
-
-		const { senha: _, ...logedUser } = user
-		req.professor = logedUser
-	}
-
-	if (!user) {
-		throw new UnauthorizedError('Não autorizado')
-	}
-
-	next()
+	next();
 }

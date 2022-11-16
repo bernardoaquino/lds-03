@@ -10,7 +10,7 @@ export class Transacao {
     @Column({type: 'text'})
     motivo: string
 
-    @Column({type: 'double'})
+    @Column({type: 'int'})
     valor: number
 
     @ManyToOne(() => Professor, professor => professor.transacoes)
