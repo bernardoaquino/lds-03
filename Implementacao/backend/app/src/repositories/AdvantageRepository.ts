@@ -5,6 +5,7 @@ import { AppDataSource } from '../data-source';
 /** Models */
 import { Empresa } from './../models/Empresa';
 import { Vantagem } from '../models/Vantagem';
+import BusinessRepository from './BusinessRepository';
 
 class AdvantageRepository {
     private dataSource = AppDataSource.getRepository(Vantagem);
@@ -15,6 +16,24 @@ class AdvantageRepository {
         const advantage = await this.dataSource.findOneBy({ id });
 
         return advantage;
+    }
+
+    getByBusinessId = async (businessId: number): Promise<Vantagem[] | null> => {
+        const business = await BusinessRepository.getById(businessId);
+
+        if (!business) {
+            throw new Error('Empresa não encontrada');
+        }
+
+        const advantages = await this.dataSource.findBy({ empresa: business });
+
+        return advantages;
+    }
+
+    findAll = async (): Promise<Vantagem[] | null> => {
+        const advantages = await this.dataSource.find();
+
+        return advantages;
     }
     
     create = async (business: Empresa, advantage: Partial<Vantagem>): Promise<Vantagem> => {

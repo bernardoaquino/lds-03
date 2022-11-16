@@ -6,6 +6,44 @@ import AdvantageRepository from '../repositories/AdvantageRepository';
 import BusinessRepository from '../repositories/BusinessRepository';
 
 class AdvantageController {
+    listAllOwnedByBusiness = async (req: Request, res: Response) => {
+        try {
+            const { id } = req.empresa;
+
+            if (!id) {
+                throw new Error('Você precisa ser uma empresa autenticada para realizar essa operação');
+            }
+
+            const advantages = await AdvantageRepository.getByBusinessId(id);
+
+            return res.status(StatusCodes.OK).json({ advantages });
+        } catch (error: any) {
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                error: 'ADV500LB',
+                message: error?.message ?? 'No message'
+            })
+        }
+    }
+
+    listAll = async (req: Request, res: Response) => {
+        try {
+            const { id } = req.aluno;
+
+            if (!id) {
+                throw new Error('Você precisa ser um aluno autenticada para realizar essa operação');
+            }
+
+            const advantages = await AdvantageRepository.findAll();
+
+            return res.status(StatusCodes.OK).json({ advantages });   
+        } catch (error: any) {
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                error: 'ADV500LS',
+                message: error?.message ?? 'No message'
+            })
+        }
+    }
+
     create = async (req: Request, res: Response) => {
         try {
             const { id } = req.empresa;
