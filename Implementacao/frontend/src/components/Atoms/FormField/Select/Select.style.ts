@@ -13,7 +13,7 @@ export const Label = styled.label`
 
 export const Select = styled.select`
   padding: ${(props) => props.theme.grid(2)};
-  border: 1px solid ${(props) => props.theme.color.neutral[75]};
+  border: 1px solid ${(props) => props.theme.color.neutral[50]};
   border-radius: ${(props) => props.theme.grid(.5)};
 `;
 

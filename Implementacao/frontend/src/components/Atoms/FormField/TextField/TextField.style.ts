@@ -13,6 +13,6 @@ export const Label = styled.label`
 
 export const TextField = styled.input`
   padding: ${(props) => props.theme.grid(2)};
-  border: 1px solid ${(props) => props.theme.color.neutral[75]};
+  border: 1px solid ${(props) => props.theme.color.neutral[50]};
   border-radius: ${(props) => props.theme.grid(.5)};
 `;

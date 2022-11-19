@@ -33,7 +33,7 @@ export const DataEntry = styled.p`
 export const Card = styled.div`
   padding: ${(props) => props.theme.grid(2)};
   background-color: ${(props) => props.theme.color.neutral[0]};
-  border: 1px solid ${(props) => props.theme.color.neutral[75]};
+  border: 1px solid ${(props) => props.theme.color.neutral[50]};
   border-radius: ${(props) => props.theme.grid(1)};
   display: flex;
   align-items: center;
