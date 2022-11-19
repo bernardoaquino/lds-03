@@ -166,7 +166,8 @@ class StudentRepository {
         const advantages = await this.studentAdvantageDataSource.find({
             where: {
                 alunoId: student
-            }
+            },
+            relations: ['vantagemId']
         });
 
         return advantages;

@@ -33,6 +33,12 @@ const TransactionHistory = ({
             render={(transaction: any) => transaction?.cupomGerado ? (
                 <El.Transaction>
                     <El.DataEntry>
+                        <b>Vantagem: </b> {transaction.vantagemId.nome}
+                    </El.DataEntry>
+                    <El.DataEntry>
+                        <b>Valor: </b> {transaction.vantagemId.custoMoedas}
+                    </El.DataEntry>
+                    <El.DataEntry>
                         <b>Cupom gerado: </b> {transaction.cupomGerado}
                     </El.DataEntry>
                 </El.Transaction>
