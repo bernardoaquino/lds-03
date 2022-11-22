@@ -32,7 +32,7 @@ const useTransfer = (): UseTransferResponse => {
             headers: session.authHeaders
         })
 
-        const sentMoneySuccessfully = responseData.status !== 201;
+        const sentMoneySuccessfully = responseData.status === 201;
 
         if (sentMoneySuccessfully) {
             toast.success('Moedas enviadas com sucesso');
