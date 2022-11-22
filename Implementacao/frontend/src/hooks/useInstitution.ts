@@ -35,11 +35,11 @@ type SignUpInstitutionResponse = {
 const BASE_API_URL = `${process.env.REACT_APP_API_BASE_URL}/institution`;
 
 export const useSignUpInstitution = () => {
-  const signUp = async (institution: InstitutionData): Promise<SignUpResponse | void> => {
+  const signUp = async (institute: InstitutionData): Promise<SignUpResponse | void> => {
     const response = await fetch(BASE_API_URL, {
       method: 'POST',
       body: JSON.stringify({
-        ...institution
+        institute
       }),
       headers: {
         'Content-Type': 'application/json'
