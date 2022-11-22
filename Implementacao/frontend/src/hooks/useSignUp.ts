@@ -53,7 +53,7 @@ export const useSignUpBusiness = () => {
     const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/business`, {
       method: 'POST',
       body: JSON.stringify({
-        ...business
+        business
       }),
       headers: {
         'Content-Type': 'application/json'
@@ -86,7 +86,7 @@ export const useSignUpProfessor = () => {
     const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/professor`, {
       method: 'POST',
       body: JSON.stringify({
-        ...professor
+        professor
       }),
       headers: {
         'Content-Type': 'application/json'
