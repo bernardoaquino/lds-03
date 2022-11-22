@@ -18,7 +18,7 @@ const useUpdateProfessor = (): UseUpdateProfessorResponse => {
     const { session } = useSession();
 
     const update = async (professor: ProfessorData) => {
-        const responseData = await fetch(`${process.env.REACT_APP_API_BASE_URL}/professor/${professor.cpf}`, {
+        const responseData = await fetch(`${process.env.REACT_APP_API_BASE_URL}/professor`, {
             method: 'PUT',
             body: JSON.stringify(professor),
             headers: session.authHeaders

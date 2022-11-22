@@ -18,7 +18,7 @@ const useUpdateBusiness = (): UseUpdateBusinessResponse => {
     const { session } = useSession();
 
     const update = async (business: BusinessData) => {
-        const responseData = await fetch(`${process.env.REACT_APP_API_BASE_URL}/empresa/${business.email}`, {
+        const responseData = await fetch(`${process.env.REACT_APP_API_BASE_URL}/business`, {
             method: 'PUT',
             body: JSON.stringify(business),
             headers: session.authHeaders

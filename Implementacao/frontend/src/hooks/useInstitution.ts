@@ -119,13 +119,9 @@ const useInstitution = (): UseInstitutionResponse => {
     const getInstitutionData = useCallback(async (keepIsLoadingState = false) => {
         !keepIsLoadingState && setIsLoading(true);
 
-        const responseData = await fetch(`${process.env.REACT_APP_API_BASE_URL}/perfil/instituicao`, {
-            headers: session.authHeaders
-        })
+        const _institution = session?.data;
 
-        if (responseData.status === 200) {
-            const _institution = await responseData.json();
-
+        if (_institution) {
             setInstitution(_institution);
             setError(false);
         } else {
