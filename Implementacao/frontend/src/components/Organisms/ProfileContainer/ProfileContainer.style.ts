@@ -11,6 +11,8 @@ export const Header = styled.div`
   justify-content: space-between;
 `;
 
+export const ButtonWrapper = styled.div``;
+
 export const Name = styled.h2`
   font-size: ${(props) => props.theme.typography.fontSize[24]};
 `;

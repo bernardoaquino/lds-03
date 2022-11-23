@@ -50,7 +50,9 @@ const BusinessProfile = () => {
         <El.Name>{business?.nome}</El.Name>
         <Button onClick={() => setIsModalOpen(true)} color={'primary'}>editar</Button>
       </El.Header>
-      <Button onClick={() => setIsCreateAdvantageModalOpen(true)} color={'primary'}>criar vantagem</Button>
+      <El.ButtonWrapper>
+        <Button onClick={() => setIsCreateAdvantageModalOpen(true)} color={'primary'}>criar vantagem</Button>
+      </El.ButtonWrapper>
       <List
         items={advantages}
         render={(advantage: any) => (
