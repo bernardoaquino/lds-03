@@ -20,7 +20,7 @@ const useUpdateInstitution = (): UseUpdateInstitutionResponse => {
     const update = async (institution: InstitutionData) => {
         const responseData = await fetch(`${process.env.REACT_APP_API_BASE_URL}/institution`, {
             method: 'PUT',
-            body: JSON.stringify(institution),
+            body: JSON.stringify({ institute: institution }),
             headers: session.authHeaders
         })
 

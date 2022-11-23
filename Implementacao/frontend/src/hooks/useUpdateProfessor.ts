@@ -20,7 +20,7 @@ const useUpdateProfessor = (): UseUpdateProfessorResponse => {
     const update = async (professor: ProfessorData) => {
         const responseData = await fetch(`${process.env.REACT_APP_API_BASE_URL}/professor`, {
             method: 'PUT',
-            body: JSON.stringify(professor),
+            body: JSON.stringify({ professor }),
             headers: session.authHeaders
         })
 

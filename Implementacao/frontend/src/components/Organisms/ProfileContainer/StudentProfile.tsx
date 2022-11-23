@@ -35,8 +35,8 @@ const StudentProfile = () => {
     });
   }
 
-  const handleAcquireAdvantage = (advantageId: number) => {
-    acquireAdvantage(advantageId).then((response: any) => {
+  const handleAcquireAdvantage = (advantageId: number, cost: number) => {
+    acquireAdvantage(advantageId, cost).then((response: any) => {
       if (!response.error) {
         refetchAdvantages();
         setUpdateTransferHistory(true);
@@ -79,7 +79,7 @@ const StudentProfile = () => {
                 {advantage?.descricao}
               </El.DataEntry>
             </El.Wrapper>
-            <Button onClick={() => handleAcquireAdvantage(advantage.id)}>adquirir</Button>
+            <Button onClick={() => handleAcquireAdvantage(advantage.id, advantage.custoMoedas)}>adquirir</Button>
           </El.Card>
         )}
       />

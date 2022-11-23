@@ -56,9 +56,9 @@ export const useCreateAdvantage = (): UseCreateAdvantageResponse => {
 };
 
 export const useAcquireAdvantage = (): UseAcquireAdvantageResponse => {
-    const { session } = useSession();
+    const { session, updateSession } = useSession();
 
-    const acquireAdvantage = async (advantageId: number) => {    
+    const acquireAdvantage = async (advantageId: number, cost: number) => {    
         const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/student/advantage`, {
           method: 'POST',
           body: JSON.stringify({ advantageId }),
@@ -69,6 +69,14 @@ export const useAcquireAdvantage = (): UseAcquireAdvantageResponse => {
         
         if (advantageAcquiredSuccessfully) {
           toast.success("Vantagem adquirida!");
+
+          updateSession({
+            ...session,
+            data: {
+              ...session.data,
+              qtdeMoedas: session?.data?.qtdeMoedas - cost
+            }
+          });
         } else {
           const errorMessage = await response.json();
     

@@ -8,6 +8,7 @@ import {
   INSTITUTION_PROFILE_URL, 
   INSTITUTION_SIGNUP_URL, 
   PROFESSOR_PROFILE_URL, 
+  PROFESSOR_SIGNUP_URL, 
   STUDENT_PROFILE_URL, 
   STUDENT_SIGNUP_URL 
 } from '../../../constants';
@@ -51,6 +52,8 @@ const UserSignUp = () => {
       <El.CreateAccountText href={INSTITUTION_SIGNUP_URL}>Crie uma conta de instituição de ensino</El.CreateAccountText>
       <El.DividerText>OU</El.DividerText>
       <El.CreateAccountText href={BUSINESS_SIGNUP_URL}>Crie uma conta de empresa parceira</El.CreateAccountText>
+      <El.DividerText>OU</El.DividerText>
+      <El.CreateAccountText href={PROFESSOR_SIGNUP_URL}>Crie uma conta de professor</El.CreateAccountText>
     </El.Wrapper>
   )
 }

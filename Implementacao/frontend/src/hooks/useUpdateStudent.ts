@@ -18,9 +18,9 @@ const useUpdateStudent = (): UseUpdateStudentResponse => {
     const { session } = useSession();
 
     const update = async (student: StudentData) => {
-        const responseData = await fetch(`${process.env.REACT_APP_API_BASE_URL}/aluno/${student.rg}`, {
+        const responseData = await fetch(`${process.env.REACT_APP_API_BASE_URL}/student`, {
             method: 'PUT',
-            body: JSON.stringify(student),
+            body: JSON.stringify({ student }),
             headers: session.authHeaders
         })
 

@@ -18,7 +18,7 @@ type SessionContext = {
 
 type Session = {
     name: string;
-    data: Object;
+    data: any;
     token: string;
     authHeaders?: KeyValuePair<string>;
     userType?: 'business' | 'student' | 'institution' | 'professor';

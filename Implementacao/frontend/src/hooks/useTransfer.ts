@@ -18,7 +18,7 @@ type TransferResponse = {
 const BASE_API_URL = `${process.env.REACT_APP_API_BASE_URL}/transfer`;
 
 const useTransfer = (): UseTransferResponse => {
-    const { session } = useSession();
+    const { session, updateSession } = useSession();
 
     const transfer = async (transfer: TransferData) => {
         const { studentId, ...transferData } = transfer;
@@ -36,6 +36,14 @@ const useTransfer = (): UseTransferResponse => {
 
         if (sentMoneySuccessfully) {
             toast.success('Moedas enviadas com sucesso');
+
+            updateSession({
+                ...session,
+                data: {
+                  ...session.data,
+                  qtdeMoedas: session?.data?.qtdeMoedas - (transfer?.valor as number)
+                }
+            });
         } else {
             toast.error('Ocorreu um erro ao enviar as moedas, cheque o seu saldo');
         }
